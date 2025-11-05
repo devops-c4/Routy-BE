@@ -28,6 +28,10 @@ public class UserDTO {
 
     private String role;
 
+    private String phone;
+
     private int isDeleted;
+
+    private byte[] image;
 
 }

@@ -4,6 +4,7 @@ package com.c4.routy.domain.user.controller;
 import com.c4.routy.domain.user.dto.UserDTO;
 import com.c4.routy.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,13 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
 
     private final UserService userService;
 
     @PostMapping("/register")
     public ResponseEntity<String> login(@RequestBody UserDTO userDTO){
-        System.out.println("userDTO = " + userDTO);
+        log.info("userDTO = {}", userDTO);
 
         UserDTO existUser = userService.findUserByEmail(userDTO);
         if(existUser == null){

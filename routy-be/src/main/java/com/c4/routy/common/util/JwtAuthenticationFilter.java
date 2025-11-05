@@ -4,6 +4,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
+@Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
@@ -32,9 +34,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (token != null && jwtTokenProvider.validateToken(token)) {
             String userEmail = jwtTokenProvider.getUserEmailFromToken(token);
             String role = jwtTokenProvider.getUserRoleFromToken(token);
-            System.out.println("role = " + role);
+            log.info("role = {}", role);
             AbstractAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userEmail,"", List.of(new SimpleGrantedAuthority(role)));
-            System.out.println("Authorities in filter: " + authentication.getAuthorities());
+            log.info("Authorities in filter: {}", authentication.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 

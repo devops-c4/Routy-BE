@@ -8,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -20,6 +21,7 @@ import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler {
     private final JwtTokenProvider jwtTokenProvider;
     private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
@@ -46,7 +48,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
             Map<String, Object> res = (Map<String, Object>) attributes.get("response");
             email = (String) res.get("email");
             username = (String) res.get("nickname");
-            System.out.println("네이버 로그인: " + email + ", name = " + name);
+            log.info("네이버 로그인: {}, name = {}" , email, name);
         }else if (attributes.containsKey("kakao_account")) {
             Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
             email = (String) kakaoAccount.get("email");
@@ -56,40 +58,18 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
                 username = (String) profile.get("nickname");
             }
 
-            System.out.println("카카오 로그인: " + email + ", name = " + name);
+            log.info("카카오 로그인: {}, name = {}" , email, name);
         }else {
             email = (String) attributes.get("email");
             username = (String) attributes.get("given_name"); // ✅ 이름만 (예: John)
 
-            System.out.println("구글 로그인: " + email + ", name = " + name);
+            log.info("구글 로그인: {}, name = {}" , email, name);
         }
-
-//        if (attributes.containsKey("response")) {
-//            // 네이버 응답 구조
-//            Map<String, Object> res = (Map<String, Object>) attributes.get("response");
-//            email = (String) res.get("email");
-//            System.out.println("email = " + email);
-//        }else if (attributes.containsKey("kakao_account")) {
-//            Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
-//            email = (String) kakaoAccount.get("email");
-//
-//            if (kakaoAccount.containsKey("profile")) {
-//                Map<String, Object> profile = (Map<String, Object>) kakaoAccount.get("profile");
-//                nickname = (String) profile.get("nickname");
-//            }
-//
-//            System.out.println("카카오 로그인: " + email);
-//        }else {
-//            // 구글 응답 구조
-//            email = (String) attributes.get("email");
-//            System.out.println("email = " + email);
-//        }
-
 
 
         userDTO.setEmail(email);
         userDTO.setUsername(username);
-        userDTO.setRole("ROLE_일반회원");
+        userDTO.setRole("ROLE_USER");
         userDTO.setIsDeleted(0);
 
         UserDTO existUser = userService.findUserByEmail(userDTO);
