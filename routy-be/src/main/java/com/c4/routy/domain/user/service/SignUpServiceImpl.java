@@ -6,6 +6,7 @@ import com.c4.routy.domain.user.entity.UserEntity;
 import com.c4.routy.domain.user.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,9 @@ public class SignUpServiceImpl implements SignUpService{
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ModelMapper modelMapper;
+
+    @Value("${app.default-profile-image}")
+    private String defaultProfileImageUrl;
 
     @Autowired
     public SignUpServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, ModelMapper modelMapper) {
@@ -32,6 +36,7 @@ public class SignUpServiceImpl implements SignUpService{
         userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         userDTO.setRole("ROLE_USER");
         UserEntity userEntity = modelMapper.map(userDTO, UserEntity.class);
+        userEntity.setImageUrl(defaultProfileImageUrl);
         userRepository.save(userEntity);
     }
 }

@@ -47,6 +47,6 @@ public class UserEntity {
     private boolean isDeleted;
 
     @Column(name = "image_url")
-    private String image_url;
+    private String imageUrl;
 
 }
