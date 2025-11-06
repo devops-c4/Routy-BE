@@ -31,4 +31,10 @@ public class UserController {
             return ResponseEntity.ok("존재하는 회원입니다.");
         }
     }
+
+    @PostMapping("/find-email")
+    public ResponseEntity<String> findEmail(String username, String phone){
+        String result = userService.findUserByUsernameAndPhone(username,phone);
+        return ResponseEntity.ok(result);
+    }
 }
