@@ -14,6 +14,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import java.util.Collections;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 // 시큐리티 설정 클래스
 // 암호화 빈등록
 // 필터 체인 등록
@@ -22,6 +24,8 @@ import java.util.Collections;
 public class WebSecurityConfig {
 
     private final JwtAuthenticationProvider jwtAuthenticationProvider;
+    private final CustomOAuth2UserService customOAuth2UserService;
+    private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 
     @Autowired
     public WebSecurityConfig(JwtAuthenticationProvider jwtAuthenticationProvider) {
@@ -39,12 +43,22 @@ public class WebSecurityConfig {
                 // csrf 토큰 사용 X
                 .csrf(csrf -> csrf.disable())
 
+                // cors 설정 제거 (WebConfig.java에서 설정한 것으로 적용하기 위해)
+                .cors(withDefaults())
+
                 // 해당 경로 요청 허용
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("*").permitAll()
                         .requestMatchers("/user/register", "/validation/sendmail").permitAll()
+                        .requestMatchers("/api/login", "/api/signup", "/oauth2/**", "/login/**").permitAll()
                         .requestMatchers("/file/**").permitAll()
                         .anyRequest().authenticated())
+
+                // OAuth2.0 Client를 위한 요청 허용
+                .oauth2Login(oauth2 -> oauth2
+                        .userInfoEndpoint(userInfo -> userInfo.userService(customOAuth2UserService))
+                        .successHandler(oAuth2LoginSuccessHandler)
+                )
 
                 // 세션 방식 사용 X
                 .sessionManagement(session ->
