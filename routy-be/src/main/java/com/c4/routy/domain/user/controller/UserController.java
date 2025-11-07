@@ -18,19 +18,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+//
+//    @PostMapping("/register")
+//    public ResponseEntity<String> login(@RequestBody UserDTO userDTO){
+//        System.out.println("userDTO = " + userDTO);
+//
+//        UserDTO existUser = userService.findUserByEmail(userDTO);
+//        if(existUser == null){
+//            userService.insertUser(userDTO);
+//            return ResponseEntity.ok("회원가입을 하였습니다.");
+//        }else{
+//            return ResponseEntity.ok("존재하는 회원입니다.");
+//        }
+//    }
 
-    @PostMapping("/register")
-    public ResponseEntity<String> login(@RequestBody UserDTO userDTO){
-        log.info("userDTO = {}", userDTO);
 
-        UserDTO existUser = userService.findUserByEmail(userDTO);
-        if(existUser == null){
-            userService.insertUser(userDTO);
-            return ResponseEntity.ok("회원가입을 하였습니다.");
-        }else{
-            return ResponseEntity.ok("존재하는 회원입니다.");
-        }
-    }
 
     @PostMapping("/find-email")
     public ResponseEntity<String> findEmail(String username, String phone){

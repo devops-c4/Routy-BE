@@ -16,20 +16,20 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final ModelMapper modelMapper;
-
     private final UserRepository userRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserDTO findUserByEmail(UserDTO userDTO){
-        String email = userDTO.getEmail();
-        System.out.println("email(service) = " + email);
-        UserEntity userEntity = userRepository.findByUserEmail(email);
-        if(userEntity == null){
-            return null;
-        }else{
-            return modelMapper.map(userEntity, UserDTO.class);
-        }
+//        String email = userDTO.getEmail();
+//        System.out.println("email(service) = " + email);
+////        UserEntity user = userRepository.findByUserEmail(email);
+//        if(user == null){
+//            return null;
+//        }else{
+//            return modelMapper.map(user, UserDTO.class);
+//        }
+        return null;
     }
 
     public String findUserByUsernameAndPhone(String username, String phone) {

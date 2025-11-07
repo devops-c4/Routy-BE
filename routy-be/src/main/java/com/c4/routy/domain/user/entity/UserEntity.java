@@ -6,9 +6,8 @@ import lombok.*;
 
 @Entity
 @Table(name = "tbl_user")
-@Getter
-@Setter
 @ToString
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEntity {
@@ -16,19 +15,19 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_no")
-    private int userNo;
+    private Integer userNo;
 
     @Column(name = "username")
     private String username;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "age")
-    private int age;
+    private Integer age;
 
     @Column(name = "gender")
     private String gender;
@@ -36,13 +35,13 @@ public class UserEntity {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "role")
+    @Column(name = "role", nullable = false)
     private String role;
 
-    @Column(name = "is_deleted")
-    private int isDeleted;
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted;
 
-    @Column(name = "image")
-    private byte[] image;
+    @Column(name = "image_url")
+    private String imageUrl;
 
 }

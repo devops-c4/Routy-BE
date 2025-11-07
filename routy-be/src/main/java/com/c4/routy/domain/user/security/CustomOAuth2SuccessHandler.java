@@ -61,7 +61,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
             log.info("카카오 로그인: {}, name = {}" , email, name);
         }else {
             email = (String) attributes.get("email");
-            username = (String) attributes.get("given_name"); // ✅ 이름만 (예: John)
+            username = (String) attributes.get("given_name");
 
             log.info("구글 로그인: {}, name = {}" , email, name);
         }
@@ -70,7 +70,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
         userDTO.setEmail(email);
         userDTO.setUsername(username);
         userDTO.setRole("ROLE_USER");
-        userDTO.setIsDeleted(0);
+        userDTO.setDeleted(false);
 
         UserDTO existUser = userService.findUserByEmail(userDTO);
         if (existUser == null) {
