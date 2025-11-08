@@ -22,6 +22,10 @@ public class ValidationEmailService {
             return 0;
         }
 
+        if(!mail.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")){
+            return 0;
+        }
+
         MimeMessage message = javaMailSender.createMimeMessage();
         String senderEmail= "indy03222100@gmail.com";
         int number = createNumber();

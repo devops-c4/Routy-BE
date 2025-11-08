@@ -1,6 +1,5 @@
 package com.c4.routy.domain.user.service;
 
-import com.c4.routy.domain.user.dto.ResponseRegistUser;
 import com.c4.routy.domain.user.dto.UserDTO;
 import com.c4.routy.domain.user.entity.UserEntity;
 import com.c4.routy.domain.user.repository.UserRepository;

@@ -23,7 +23,7 @@ public class UserService {
     public UserDTO findUserByEmail(UserDTO userDTO){
 //        String email = userDTO.getEmail();
 //        System.out.println("email(service) = " + email);
-////        UserEntity user = userRepository.findByUserEmail(email);
+//        UserEntity user = userRepository.findByUserEmail(email);
 //        if(user == null){
 //            return null;
 //        }else{
@@ -33,7 +33,7 @@ public class UserService {
     }
 
     public String findUserByUsernameAndPhone(String username, String phone) {
-       UserEntity user = userRepository.findUserEntitiesByUsernameAndPhone(username,phone);
+       UserEntity user = userRepository.findByUserEmailAndPhone(username,phone);
        if(user == null){
            return "존재하지 않는 회원입니다.";
        }else{
