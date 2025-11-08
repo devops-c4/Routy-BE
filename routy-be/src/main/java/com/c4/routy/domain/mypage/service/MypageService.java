@@ -4,6 +4,8 @@ import com.c4.routy.common.util.DateTimeUtil;
 import com.c4.routy.domain.mypage.dto.*;
 import com.c4.routy.domain.mypage.mapper.MypageQueryMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -13,6 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MypageService {
     private final MypageQueryMapper mypageQueryMapper;
+
+    @Value("${app.default-profile-image}")
+    private String defaultProfileImage;
 
     public MyPageResponseDTO getMyPage(Integer userNo, int year, int month) {
 
@@ -26,6 +31,14 @@ public class MypageService {
 
         // 2) 각 영역별 조회
         ProfileDTO profile = mypageQueryMapper.selectProfile(userNo);
+
+        // 프로필 이미지가 없을 경우 yml에 있는 기본 이미지 적용
+        if (profile != null) {
+            if (profile.getProfileImage() == null || profile.getProfileImage().isEmpty()) {
+                profile.setProfileImage(defaultProfileImage);
+            }
+        }
+
         List<CalendarPlanDTO> calendarPlans =
                 mypageQueryMapper.selectCalendarPlans(userNo, startStr, endStr);
         List<MyPlanDTO> upcomingPlans =
