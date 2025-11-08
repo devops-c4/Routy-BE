@@ -22,7 +22,7 @@ public class WebSecurityConfig {
                 .formLogin(formLogin -> formLogin.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("*").permitAll()
-                        .requestMatchers("/api/mypage/**").permitAll()
+                        .requestMatchers("/api/**").permitAll()
                         .requestMatchers("/user/login", "user/register", "/validation/sendmail").permitAll()
                         .requestMatchers("/file/**").permitAll()
                         .anyRequest().authenticated())
