@@ -1,11 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.c4.routy.domain.plan.mapper.PlanQueryMapper">
 
-    <select id="testConnection" resultType="string">
-        SELECT 'OK' AS result
+    <!-- 1) 일정 상세보기 -->
+    <select id="selectPlanDetail"
+            parameterType="int"
+            resultType="com.c4.routy.domain.plan.dto.PlanDetailResponseDTO">
+        SELECT
+            p.plan_id        AS planId,
+            p.plan_title     AS planTitle,
+            p.start_time     AS startDate,
+            p.end_time       AS endDate,
+            p.is_shared      AS shared,
+            p.bookmark_count AS bookmarkCount,
+            p.view_count     AS viewCount,
+            r.region_name    AS regionName,
+            u.username       AS username,
+            u.user_no        AS userNo
+        FROM TBL_PLAN p
+                 LEFT JOIN TBL_REGION r ON p.region_id = r.region_id
+                 LEFT JOIN TBL_USER   u ON p.user_id = u.user_no
+        WHERE p.plan_id = #{planId}
+          AND p.is_deleted = 0
+    </select>
+
+    <!-- 2) 일정 수정화면 로딩 -->
+    <select id="selectPlanEdit"
+            parameterType="int"
+            resultType="com.c4.routy.domain.plan.dto.PlanEditResponseDTO">
+        SELECT
+            p.plan_id     AS planId,
+            p.plan_title  AS title,
+            p.start_time  AS startDate,
+            p.end_time    AS endDate,
+            r.region_name AS destination
+        FROM TBL_PLAN p
+                 LEFT JOIN TBL_REGION r ON p.region_id = r.region_id
+        WHERE p.plan_id = #{planId}
+          AND p.is_deleted = 0
+    </select>
+
+    <!-- 3) 리뷰 모달 데이터 -->
+    <!-- DDL상 TBL_REVIEW에는 user_id가 없으므로
+         리뷰 -> 플랜 -> 유저 순으로 타고가서 작성자 이름을 가져온다 -->
+    <select id="selectReviewForm"
+            parameterType="int"
+            resultType="com.c4.routy.domain.plan.dto.PlanReviewFormDTO">
+        SELECT
+            r.review_id   AS reviewId,
+            r.plan_id     AS planId,
+            r.content     AS content,
+            r.rating      AS rating,
+            r.created_at  AS createdAt,
+            u.username    AS username,
+            u.user_no     AS userNo
+        FROM TBL_REVIEW r
+                 JOIN TBL_PLAN   p ON r.plan_id = p.plan_id
+                 JOIN TBL_USER   u ON p.user_id = u.user_no
+        WHERE r.plan_id = #{planId}
+        ORDER BY r.created_at DESC
+            LIMIT 1
     </select>
 
 </mapper>

@@ -1,0 +1,16 @@
+package com.c4.routy.domain.plan.repository;
+
+import com.c4.routy.domain.plan.entity.DurationEntity;
+import com.c4.routy.domain.plan.entity.PlanEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface DurationRepository extends JpaRepository<DurationEntity, Integer> {
+
+    List<DurationEntity> findByPlan(PlanEntity plan);
+
+    void deleteByPlan(PlanEntity plan);
+}
