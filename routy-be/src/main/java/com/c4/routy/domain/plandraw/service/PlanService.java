@@ -1,12 +1,11 @@
-package com.c4.routy.domain.plan.service;
+package com.c4.routy.domain.plandraw.service;
 
 import com.c4.routy.domain.duration.entity.DurationEntity;
 import com.c4.routy.domain.duration.repository.DurationRepository;
-import com.c4.routy.domain.duration.service.DurationService;
-import com.c4.routy.domain.plan.dto.PlanCreateRequestDTO;
-import com.c4.routy.domain.plan.dto.PlanResponseDTO;
-import com.c4.routy.domain.plan.entity.PlanEntity;
-import com.c4.routy.domain.plan.repository.PlanRepository;
+import com.c4.routy.domain.plandraw.dto.PlanCreateRequestDTO;
+import com.c4.routy.domain.plandraw.dto.PlanResponseDTO;
+import com.c4.routy.domain.plandraw.entity.PlanEntity;
+import com.c4.routy.domain.plandraw.repository.PlanRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

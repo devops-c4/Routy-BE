@@ -1,4 +1,4 @@
-package com.c4.routy.domain.plan.dto;
+package com.c4.routy.domain.plandraw.dto;
 
 import lombok.Getter;
 import lombok.Setter;

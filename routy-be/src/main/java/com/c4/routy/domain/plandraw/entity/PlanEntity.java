@@ -1,4 +1,4 @@
-package com.c4.routy.domain.plan.entity;
+package com.c4.routy.domain.plandraw.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

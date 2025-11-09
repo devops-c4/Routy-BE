@@ -1,4 +1,4 @@
-package com.c4.routy.domain.plan.mapper;
+package com.c4.routy.domain.plandraw.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 

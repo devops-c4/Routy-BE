@@ -1,6 +1,6 @@
-package com.c4.routy.domain.plan.repository;
+package com.c4.routy.domain.plandraw.repository;
 
-import com.c4.routy.domain.plan.entity.PlanEntity;
+import com.c4.routy.domain.plandraw.entity.PlanEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

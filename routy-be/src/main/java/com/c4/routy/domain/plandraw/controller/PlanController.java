@@ -1,10 +1,9 @@
-package com.c4.routy.domain.plan.controller;
+package com.c4.routy.domain.plandraw.controller;
 
-import com.c4.routy.domain.plan.dto.PlanCreateRequestDTO;
-import com.c4.routy.domain.plan.dto.PlanResponseDTO;
-import com.c4.routy.domain.plan.entity.PlanEntity;
-import com.c4.routy.domain.plan.repository.PlanRepository;
-import com.c4.routy.domain.plan.service.PlanService;
+import com.c4.routy.domain.plandraw.dto.PlanCreateRequestDTO;
+import com.c4.routy.domain.plandraw.dto.PlanResponseDTO;
+import com.c4.routy.domain.plandraw.entity.PlanEntity;
+import com.c4.routy.domain.plandraw.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +22,6 @@ public class PlanController {
     public PlanEntity createPlan(@RequestBody PlanCreateRequestDTO dto) {
         return planService.createPlan(dto);
     }
-
 
     // 전체 플랜 조회
     @GetMapping
