@@ -28,7 +28,7 @@ public class PlanService {
     private final DurationRepository durationRepository;
 
     /**
-     * 일정 생성 시 Duration(일차) 자동 생성
+     * 일정 생성 시 Duration(일차)는 자동 생성(duration도메인에서 생성)
      */
     @Transactional
     public PlanEntity createPlan(PlanCreateRequestDTO dto) {
@@ -42,22 +42,7 @@ public class PlanService {
         plan.setUserId(dto.getUserId() != null ? dto.getUserId() : 1);
         plan.setCreatedAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 
-        PlanEntity savedPlan = planRepository.save(plan);
-
-        // 시작일~종료일 일수 계산
-        LocalDate start = LocalDate.parse(dto.getStartDate());
-        LocalDate end = LocalDate.parse(dto.getEndDate());
-        long totalDays = ChronoUnit.DAYS.between(start, end) + 1;
-
-        // Duration 자동 생성
-        for (int i = 1; i <= totalDays; i++) {
-            DurationEntity duration = new DurationEntity();
-            duration.setDay(i);
-            duration.setPlanId(savedPlan.getPlanId());
-            durationRepository.save(duration);
-        }
-
-        return savedPlan;
+        return  planRepository.save(plan);
     }
 
 
