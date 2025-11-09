@@ -60,6 +60,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/user/register", "/validation/sendmail").permitAll()
                         .requestMatchers("/api/login", "/api/signup", "/oauth2/**", "/login/**").permitAll()
                         .requestMatchers("/file/**").permitAll()
+                        .requestMatchers("/api/**").permitAll()
                         .anyRequest().authenticated())
                 // OAuth2.0 Client를 위한 요청 허용
                 .oauth2Login(oauth2 -> oauth2
