@@ -15,6 +15,7 @@ public class PlanActivityDTO {
     private String place;         // 제주국제공항, 흑돼지 거리 ... (장소명)
 
     private String tag;           // 숙소 / 카페 / 식당 / 관광 / 기타 ... (아이콘 바인딩용 태그)
+    private String url;           // 여행지 정보url
 
 
 
