@@ -35,8 +35,8 @@ public class PlanDrawService {
         // PlanEntity 생성 및 저장
         PlanEntity plan = new PlanEntity();
         plan.setPlanTitle(dto.getPlanTitle());
-        plan.setStartTime(dto.getStartDate());
-        plan.setEndTime(dto.getEndDate());
+        plan.setStartDate(dto.getStartDate());
+        plan.setEndDate(dto.getEndDate());
         plan.setRegionId(dto.getRegionId());
         plan.setUserId(dto.getUserId() != null ? dto.getUserId() : 1);
         plan.setCreatedAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
