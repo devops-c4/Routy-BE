@@ -14,11 +14,6 @@ public class WebConfig implements WebMvcConfigurer {
         return new ModelMapper();
     }
 
-    @Bean
-    public BCryptPasswordEncoder getBCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")                   // origin 이후 요청 경로 패턴
@@ -26,5 +21,10 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:5173")        // origin 등록
                 .allowCredentials(true)                         // 이것 없으면 헤더에 쿠키가 전송 안됨.
                 .allowedMethods("GET", "POST", "PUT", "DELETE");
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
