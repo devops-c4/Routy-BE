@@ -1,6 +1,6 @@
-package com.c4.routy.domain.plan.dto.KakaoMobility;
+package com.c4.routy.domain.direction.dto.KakaoMobility;
 
-import com.c4.routy.domain.plan.enums.Priority;
+import com.c4.routy.domain.direction.enums.Priority;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -11,12 +11,13 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class KakaoRouteRequest {
-
+public class RoutesSummary {
     private Location origin;
     private Location destination;
-
     @JsonProperty("waypoints")
     private List<Location> wayPoints;
-    private Priority priority = Priority.RECOMMEND;
+    private Priority priority;
+    private Bound bound;
+    private int distance;
+    private int duration;
 }

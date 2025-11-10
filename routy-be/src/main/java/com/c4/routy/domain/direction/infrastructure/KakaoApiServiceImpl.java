@@ -1,8 +1,8 @@
-package com.c4.routy.domain.plan.infrastructure;
+package com.c4.routy.domain.direction.infrastructure;
 
-import com.c4.routy.domain.plan.dto.KakaoMobility.KakaoRouteRequest;
-import com.c4.routy.domain.plan.dto.KakaoMobility.KakaoRouteResponse;
-import com.c4.routy.domain.plan.dto.KakaoMobility.Location;
+import com.c4.routy.domain.direction.dto.KakaoMobility.KakaoRouteRequest;
+import com.c4.routy.domain.direction.dto.KakaoMobility.KakaoRouteResponse;
+import com.c4.routy.domain.direction.dto.KakaoMobility.Location;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

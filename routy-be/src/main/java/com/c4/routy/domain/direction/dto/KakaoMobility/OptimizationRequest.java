@@ -1,6 +1,6 @@
-package com.c4.routy.domain.plan.dto.KakaoMobility;
+package com.c4.routy.domain.direction.dto.KakaoMobility;
 
-import com.c4.routy.domain.plan.enums.Priority;
+import com.c4.routy.domain.direction.enums.Priority;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 

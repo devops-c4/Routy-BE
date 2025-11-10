@@ -1,7 +1,7 @@
-package com.c4.routy.domain.plan.service;
+package com.c4.routy.domain.direction.service;
 
-import com.c4.routy.domain.plan.dto.KakaoMobility.*;
-import com.c4.routy.domain.plan.infrastructure.KakaoApiService;
+import com.c4.routy.domain.direction.dto.KakaoMobility.*;
+import com.c4.routy.domain.direction.infrastructure.KakaoApiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

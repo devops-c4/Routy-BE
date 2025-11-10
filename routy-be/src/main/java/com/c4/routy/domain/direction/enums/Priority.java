@@ -1,4 +1,4 @@
-package com.c4.routy.domain.plan.enums;
+package com.c4.routy.domain.direction.enums;
 
 // kakao 길찾기 기준
 public enum Priority {

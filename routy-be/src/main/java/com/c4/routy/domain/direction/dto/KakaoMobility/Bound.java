@@ -1,4 +1,4 @@
-package com.c4.routy.domain.plan.dto.KakaoMobility;
+package com.c4.routy.domain.direction.dto.KakaoMobility;
 
 import lombok.*;
 

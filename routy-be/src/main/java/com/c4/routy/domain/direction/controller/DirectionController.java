@@ -1,10 +1,10 @@
-package com.c4.routy.domain.plan.controller;
+package com.c4.routy.domain.direction.controller;
 
-import com.c4.routy.domain.plan.dto.KakaoMobility.KakaoRouteRequest;
-import com.c4.routy.domain.plan.dto.KakaoMobility.KakaoRouteResponse;
-import com.c4.routy.domain.plan.dto.KakaoMobility.OptimizationRequest;
-import com.c4.routy.domain.plan.dto.KakaoMobility.OptimizationResponse;
-import com.c4.routy.domain.plan.service.MapService;
+import com.c4.routy.domain.direction.dto.KakaoMobility.KakaoRouteRequest;
+import com.c4.routy.domain.direction.dto.KakaoMobility.KakaoRouteResponse;
+import com.c4.routy.domain.direction.dto.KakaoMobility.OptimizationRequest;
+import com.c4.routy.domain.direction.dto.KakaoMobility.OptimizationResponse;
+import com.c4.routy.domain.direction.service.MapService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
