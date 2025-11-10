@@ -34,9 +34,9 @@ public class UserController {
 
 
 
-    @PostMapping("/find-email")
-    public ResponseEntity<String> findEmail(String username, String phone){
-        String result = userService.findUserByUsernameAndPhone(username,phone);
-        return ResponseEntity.ok(result);
-    }
+//    @PostMapping("/find-email")
+//    public ResponseEntity<String> findEmail(String username, String phone){
+//        String result = userService.findUserByUsernameAndPhone(username,phone);
+//        return ResponseEntity.ok(result);
+//    }
 }

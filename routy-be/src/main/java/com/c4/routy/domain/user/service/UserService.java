@@ -32,14 +32,14 @@ public class UserService {
         return null;
     }
 
-    public String findUserByUsernameAndPhone(String username, String phone) {
-       UserEntity user = userRepository.findByUserEmailAndPhone(username,phone);
-       if(user == null){
-           return "존재하지 않는 회원입니다.";
-       }else{
-           return user.getEmail();
-       }
-    }
+//    public String findUserByUsernameAndPhone(String username, String phone) {
+//       UserEntity user = userRepository.findByUserEmailAndPhone(username,phone);
+//       if(user == null){
+//           return "존재하지 않는 회원입니다.";
+//       }else{
+//           return user.getEmail();
+//       }
+//    }
 
     public void insertUser(UserDTO userDTO){
         System.out.println("userDTO = " + userDTO);
