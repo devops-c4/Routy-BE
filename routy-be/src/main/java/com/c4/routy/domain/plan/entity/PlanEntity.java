@@ -1,4 +1,4 @@
-package com.c4.routy.domain.plandraw.entity;
+package com.c4.routy.domain.plan.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,8 +18,8 @@ public class PlanEntity {
     private String planTitle;
 
     private boolean isShared;
-    private String startDate;
-    private String endDate;
+    private String startTime;
+    private String endTime;
     private boolean isDeleted;
     @Column(nullable = false)
     private Integer bookmarkCount = 0; // 기본값 추가

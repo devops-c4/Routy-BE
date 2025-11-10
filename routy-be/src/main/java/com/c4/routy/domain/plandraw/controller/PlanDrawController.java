@@ -2,42 +2,36 @@ package com.c4.routy.domain.plandraw.controller;
 
 import com.c4.routy.domain.plandraw.dto.PlanCreateRequestDTO;
 import com.c4.routy.domain.plandraw.dto.PlanResponseDTO;
-import com.c4.routy.domain.plandraw.entity.PlanEntity;
-import com.c4.routy.domain.plandraw.service.PlanService;
+import com.c4.routy.domain.plan.entity.PlanEntity;
+import com.c4.routy.domain.plandraw.service.PlanDrawService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
-@RestController
+@RestController("PlanDrawController")
 @RequestMapping("/api/plans")
 @RequiredArgsConstructor
-public class PlanController {
+public class PlanDrawController {
 
-    private final PlanService planService;
+    private final PlanDrawService planDrawService;
 
     @PostMapping
     public PlanEntity createPlan(@RequestBody PlanCreateRequestDTO dto) {
-        return planService.createPlan(dto);
+        return planDrawService.createPlan(dto);
     }
 
     // 전체 플랜 조회
     @GetMapping
     public List<PlanResponseDTO> getAllPlans() {
-        return planService.getAllPlans();
+        return planDrawService.getAllPlans();
     }
 
     // 사용자별 플랜 조회
     @GetMapping("/user/{userId}")
     public List<PlanResponseDTO> getPlansByUser(@PathVariable Integer userId) {
-        return planService.getPlansByUser(userId);
+        return planDrawService.getPlansByUser(userId);
     }
 
-    // 단일 플랜 조회
-    @GetMapping("/{planId}")
-    public Optional<PlanResponseDTO> getPlanById(@PathVariable Integer planId) {
-        return planService.getPlanById(planId);
-    }
 }
