@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.c4.routy.domain.plan.mapper.PlanQueryMapper">
+<mapper namespace="com.c4.routy.domain.plan.mapper.PlanMapper">
 
     <!-- =======================================================
          여행 상세보기 (PlanDetailResponseDTO)
