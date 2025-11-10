@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 //리뷰 등록/수정 요청 DTO (JSON 전용)
 // 파일 업로드가 없을 때 사용
 // 리뷰 내용/별점만 간단히 보낼 때
+//리뷰 등록,수정 요청
 @Builder
 @Data
 @NoArgsConstructor

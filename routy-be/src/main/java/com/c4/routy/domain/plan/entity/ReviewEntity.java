@@ -1,5 +1,6 @@
 package com.c4.routy.domain.plan.entity;
 
+import com.c4.routy.common.util.DateTimeUtil;
 import com.c4.routy.domain.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -36,27 +37,16 @@ public class ReviewEntity {
     private Integer rating;
 
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private String createdAt = DateTimeUtil.now();;
 
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private String updatedAt;
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewFileEntity> files = new ArrayList<>();
 
-    @PrePersist
-    public void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
     @PreUpdate
     public void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public void change(String content, Integer rating) {
-        this.content = content;
-        this.rating = rating;
+        this.updatedAt = DateTimeUtil.now();
     }
 }

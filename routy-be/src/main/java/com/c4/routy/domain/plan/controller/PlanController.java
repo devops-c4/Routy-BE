@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 // 일정 수정 컨트롤러
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/plans")
+@RequiredArgsConstructor
 public class PlanController {
     private final PlanService planService;
 
 
-    // 상세보기
+    // 상세보기 (일정 상세 조회)
     @GetMapping("/{planId}")
     public PlanDetailResponseDTO getPlanDetail(@PathVariable Integer planId) {
         return planService.getPlanDetail(planId);
@@ -36,3 +36,4 @@ public class PlanController {
         planService.updatePlan(dto);
     }
 }
+

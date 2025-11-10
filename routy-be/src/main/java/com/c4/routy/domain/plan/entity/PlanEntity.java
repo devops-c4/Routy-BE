@@ -1,11 +1,14 @@
 package com.c4.routy.domain.plan.entity;
 
+
+import com.c4.routy.common.util.DateTimeUtil;
+import com.c4.routy.domain.duration.entity.DurationEntity;
+import com.c4.routy.domain.region.entity.RegionEntity;
 import com.c4.routy.domain.user.entity.UserEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +16,11 @@ import java.util.List;
 // TBL_PLAN
 // 여행의 최상위 단위 (여행 제목, 기간, 지역 등)
 
+
 @Entity
 @Table(name = "TBL_PLAN")
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -34,19 +38,19 @@ public class PlanEntity {
     private boolean shared;
 
     @Column(name = "start_time", nullable = false)
-    private LocalDate startDate;
+    private String startDate = DateTimeUtil.now();
 
     @Column(name = "end_time", nullable = false)
-    private LocalDate endDate;
+    private String endDate;
 
     @Column(name = "is_deleted", nullable = false)
     private boolean deleted = false;
 
     @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private String createdAt = DateTimeUtil.now();
 
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private String updatedAt;
 
     @Column(name = "bookmark_count")
     private Integer bookmarkCount = 0;
@@ -68,15 +72,13 @@ public class PlanEntity {
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewEntity> reviews = new ArrayList<>();
 
-    @PreUpdate
-    public void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
-
     /* 편의 메서드 */
-    public void changeTitle(String title) { this.planTitle = title; }
-    public void changePeriod(LocalDate start, LocalDate end) {
+    public void changePeriod(String start, String end) {
         this.startDate = start;
         this.endDate = end;
     }
+    public void changeTitle(String title) {
+        this.planTitle = title;
+    }
+
 }

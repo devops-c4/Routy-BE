@@ -1,5 +1,6 @@
 package com.c4.routy.domain.plan.entity;
 
+import com.c4.routy.domain.duration.entity.DurationEntity;
 import jakarta.persistence.*;
 import lombok.*;
 

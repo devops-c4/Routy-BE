@@ -6,7 +6,7 @@ import com.c4.routy.domain.plan.dto.PlanReviewUploadRequestDTO;
 import com.c4.routy.domain.plan.dto.ReviewFileDTO;
 import com.c4.routy.domain.plan.entity.ReviewEntity;
 import com.c4.routy.domain.plan.entity.ReviewFileEntity;
-import com.c4.routy.domain.plan.mapper.PlanQueryMapper;
+import com.c4.routy.domain.plan.mapper.PlanMapper;
 import com.c4.routy.domain.plan.repository.ReviewFileRepository;
 import com.c4.routy.domain.plan.repository.ReviewRepository;
 import jakarta.transaction.Transactional;
@@ -22,7 +22,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService{
-    private final PlanQueryMapper planQueryMapper;
+    private final PlanMapper planMapper;
     private final ReviewRepository reviewRepository;
     private final ReviewFileRepository reviewFileRepository;
 
@@ -32,7 +32,7 @@ public class ReviewServiceImpl implements ReviewService{
      */
     @Override
     public PlanReviewFormDTO getReviewForm(Integer planId) {
-        return planQueryMapper.selectReviewForm(planId);
+        return planMapper.selectReviewForm(planId);
     }
 
     /**

@@ -1,10 +1,9 @@
-package com.c4.routy.domain.plan.entity;
+package com.c4.routy.domain.region.entity;
+
 
 import jakarta.persistence.*;
 import lombok.*;
 
-
-//  여행 지역 (TBL_REGION)
 @Entity
 @Table(name = "TBL_REGION")
 @Getter
@@ -13,6 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class RegionEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "region_id")
@@ -20,4 +20,13 @@ public class RegionEntity {
 
     @Column(name = "region_name", nullable = false)
     private String regionName;
+
+    @Column(name = "admin_code")
+    private Integer adminCode;
+
+    @Column(name = "theme")
+    private String theme;
+
+    @Column(name = "region_desc")
+    private String regionDesc;
 }
