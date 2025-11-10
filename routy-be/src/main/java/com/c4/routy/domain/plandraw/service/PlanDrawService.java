@@ -18,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,10 @@ public class PlanDrawService {
     @Transactional
     public PlanEntity createPlan(PlanCreateRequestDTO dto) {
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+        Integer userNo = userDetails.getUserNo();
+
         // PlanEntity 생성 및 저장
         PlanEntity plan = new PlanEntity();
         plan.setPlanTitle(dto.getPlanTitle());
@@ -48,15 +53,15 @@ public class PlanDrawService {
         plan.setRegion(region);
 
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
-        Integer userNo = userDetails.getUserNo();
 
         UserEntity user = userRepository.findById(userNo)
                 .orElseThrow(() -> new IllegalArgumentException("유저 없음"));
         plan.setUser(user);
 
         plan.setCreatedAt(DateTimeUtil.now());
+
+
+
 
         PlanEntity savedPlan = planRepository.save(plan);
 
