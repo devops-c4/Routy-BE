@@ -56,12 +56,9 @@ public class WebSecurityConfig {
                 // 해당 경로 요청 허용
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/**").permitAll()
-
-                        /* 나중에 일괄적으로 수정하기 */
+//                        .requestMatchers("*").permitAll()
 //                        .requestMatchers("/user/register", "/validation/sendmail").permitAll()
-//                        .requestMatchers("/user/login").permitAll()
-//                        .requestMatchers("/api/signup", "/oauth2/**").permitAll()
-//                        .requestMatchers("/auth/logout", "/auth/change-password").permitAll
+//                        .requestMatchers("/api/login", "/api/signup", "/oauth2/**", "/login/**").permitAll()
 //                        .requestMatchers("/file/**").permitAll()
                         .anyRequest().authenticated())
 
@@ -76,16 +73,18 @@ public class WebSecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 // 필터 추가
-                .addFilter(getAuthenticationManager(authenticationManager(), jwtUtil))
+                .addFilter(getAuthenticationFilter(authenticationManager(), jwtUtil))
 
                 // 로그인 후 요청에 대한 필터 (JWT 토큰 인증)
                 .addFilterBefore(new JwtFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
-        log.info("요청: {}", http);
+        log.info("SecurityFilterChain 설정 완료");
         return http.build();
     }
 
-    private Filter getAuthenticationManager(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
-        return new AuthenticationFilter(authenticationManager, jwtUtil);
+    private Filter getAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+        AuthenticationFilter filter = new AuthenticationFilter(authenticationManager, jwtUtil);
+        filter.setFilterProcessesUrl("/user/login");  // ⭐ 이 줄이 핵심!
+        return filter;
     }
 }
