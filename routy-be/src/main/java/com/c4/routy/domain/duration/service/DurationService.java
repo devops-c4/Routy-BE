@@ -40,9 +40,7 @@ public class DurationService {
             String formattedDate = DateTimeUtil.format(currentDate); // yyyy-MM-dd 형식 문자열 변환
 
             DurationEntity duration = DurationEntity.builder()
-                    .dayNo(i)
-                    .date(formattedDate)
-                    .plan(plan)
+                    .day(i)
                     .build();
 
             durations.add(durationRepository.save(duration));

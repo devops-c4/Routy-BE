@@ -104,8 +104,7 @@ public class PlanServiceImpl implements PlanService {
         for (PlanEditSaveDayDTO dayDTO : dto.getDayList()) {
             DurationEntity dayEntity = DurationEntity.builder()
                     .plan(plan)
-                    .dayNo(dayDTO.getDayNo())
-                    .date(dayDTO.getDate())
+                    .day(dayDTO.getDayNo())
                     .build();
             DurationRepository.save(dayEntity);
 

@@ -22,14 +22,11 @@ public class DurationEntity {
     @Column(name = "duration_id")
     private Integer durationId;
 
-    @Column(name = "day_no", nullable = false)
-    private Integer dayNo;
-
-    @Column(name = "date", nullable = false)
-    private String date;
+    @Column(name = "day", nullable = false)
+    private Integer day;   // 실제 일수 (DB 컬럼명 그대로 매핑)
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "plan_id")
+    @JoinColumn(name = "plan_id", nullable = false)
     private PlanEntity plan;
 
     @OneToMany(mappedBy = "duration", cascade = CascadeType.ALL, orphanRemoval = true)
