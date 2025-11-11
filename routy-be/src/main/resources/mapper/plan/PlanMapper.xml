@@ -413,4 +413,15 @@
         WHERE plan_id = #{planId}
     </select>
 
+    <!-- ========================================= -->
+    <!-- 지역 목록 조회 -->
+    <!-- ========================================= -->
+    <select id="selectAllRegions" resultType="com.c4.routy.domain.plan.dto.RegionResponseDTO">
+        SELECT
+            region_id AS regionId,
+            region_name AS regionName
+        FROM tbl_region
+        ORDER BY region_id
+    </select>
+
 </mapper>

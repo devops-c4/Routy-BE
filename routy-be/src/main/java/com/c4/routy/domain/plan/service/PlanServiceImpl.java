@@ -183,4 +183,9 @@ public class PlanServiceImpl implements PlanService {
         return planMapper.countLikes(planId);
     }
 
+    public List<RegionResponseDTO> getAllRegions() {
+        return planMapper.selectAllRegions();
+    }
+
+
 }

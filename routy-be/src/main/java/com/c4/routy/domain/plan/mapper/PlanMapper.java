@@ -56,9 +56,12 @@ public interface PlanMapper {
      */
     PlanReviewFormDTO selectReviewForm(@Param("planId") Integer planId);
 
+    // 좋아요 관련 된 매핑
     boolean checkUserLike(@Param("planId") int planId, @Param("userId") int userId);
     void insertLike(@Param("planId") int planId, @Param("userId") int userId);
     void deleteLike(@Param("planId") int planId, @Param("userId") int userId);
     int countLikes(@Param("planId") int planId);
 
+    //  지역 목록 조회 추가
+    List<RegionResponseDTO> selectAllRegions();
 }

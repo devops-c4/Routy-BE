@@ -1,10 +1,6 @@
 package com.c4.routy.domain.plan.controller;
 
-import com.c4.routy.domain.plan.dto.BrowseDetailResponseDTO;
-import com.c4.routy.domain.plan.dto.BrowseResponseDTO;
-import com.c4.routy.domain.plan.dto.PlanDetailResponseDTO;
-import com.c4.routy.domain.plan.dto.PlanEditResponseDTO;
-import com.c4.routy.domain.plan.dto.PlanEditSaveRequestDTO;
+import com.c4.routy.domain.plan.dto.*;
 import com.c4.routy.domain.plan.service.PlanServiceImpl;
 import com.c4.routy.domain.user.websecurity.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
@@ -96,6 +92,12 @@ public class PlanController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/regions")
+    public List<RegionResponseDTO> getAllRegions() {
+        return planService.getAllRegions();
+    }
+
 
 }
 
