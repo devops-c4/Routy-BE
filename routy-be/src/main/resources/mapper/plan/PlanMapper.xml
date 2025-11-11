@@ -2,7 +2,6 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.c4.routy.domain.plan.mapper.PlanMapper">
 
     <!-- =======================================================
@@ -12,10 +11,11 @@
     <!-- 활동(하루 안의 장소 일정) -->
     <resultMap id="PlanActivityResult" type="com.c4.routy.domain.plan.dto.PlanActivityDTO">
         <id property="travelId" column="travel_id"/>
-        <result property="title" column="travel_title"/>
-        <result property="place" column="address_name"/>
-        <result property="tag" column="category_group_name"/>
-        <result property="url" column="place_url"/>
+        <result property="placeName" column="place_name"/>
+        <result property="addressName" column="address_name"/>
+        <result property="categoryGroup" column="category_group_name"/>
+        <result property="placeUrl" column="place_url"/>
+        <result property="tag" column="tag"/>
     </resultMap>
 
     <!-- Day 단위 일정 묶음 -->
@@ -57,7 +57,7 @@
             d.day,
             DATE_ADD(p.start_date, INTERVAL (d.day - 1) DAY) AS day_date,
             t.travel_id,
-            t.title AS travel_title,
+            t.place_name AS place_name,
             t.address_name,
             t.category_group_name,
             t.place_url
@@ -87,7 +87,7 @@
                  LEFT JOIN TBL_TRANSPORT tr ON p.plan_id = tr.plan_id
         WHERE p.user_id = #{userId}
           AND p.is_deleted = 0
-        ORDER BY p.start_date ASC
+        ORDER BY p.start_time ASC
     </select>
 
 </mapper>
