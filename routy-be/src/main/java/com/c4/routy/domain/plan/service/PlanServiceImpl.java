@@ -126,16 +126,19 @@ public class PlanServiceImpl implements PlanService {
         planRepository.save(plan);
     }
     // 게시글 소프트 삭제 기능
+    @Override
     public void softDeletePlan(Integer planId) {
         planMapper.softDeletePlan(planId);
     }
 
     // 공유하기 기능
+    @Override
     public void togglePlanPublic(Integer planId) {
         planMapper.togglePlanPublic(planId);
     }
 
     // 헤더 부분에 있는 여행 루트 둘러러보기
+    @Override
     public List<BrowseResponseDTO> getPublicPlans(int page, int size, String sort, Integer regionId, Integer days) {
         int offset = page * size;
         return planMapper.selectPublicPlans(offset, size, sort, regionId, days);
@@ -143,6 +146,7 @@ public class PlanServiceImpl implements PlanService {
 
 
     //브라우저 카드 일정 상세 조회 (모달용)
+    @Override
     public BrowseDetailResponseDTO getPublicPlanDetail(Integer planId) {
         // 기본 정보 및 리뷰
         BrowseDetailResponseDTO dto = planMapper.selectPublicPlanDetail(planId);
@@ -167,6 +171,7 @@ public class PlanServiceImpl implements PlanService {
     }
 
     // 브라우저 모달 창 좋아요 토글
+    @Override
     public String toggleLike(Integer planId, Integer userId) {
         // 작성자 ID 확인
         Integer authorId = planMapper.selectPlanAuthorId(planId);
@@ -188,6 +193,7 @@ public class PlanServiceImpl implements PlanService {
 
 
     // 좋아요 개수 조회
+    @Override
     public int getLikeCount(Integer planId) {
         return planMapper.countLikes(planId);
     }
@@ -209,7 +215,7 @@ public class PlanServiceImpl implements PlanService {
 
 
     // 브라우저 북마크 관련 부분
-    @Transactional
+    @Override
     public String toggleBookmark(Integer planId, Integer userId) {
         boolean exists = planMapper.checkUserBookmark(planId, userId);
 
@@ -227,12 +233,38 @@ public class PlanServiceImpl implements PlanService {
 
 
     // 북마크 개수 가져오기
+    @Override
     public int getBookmarkCount(Integer planId) {
         return planMapper.countBookmarks(planId);
     }
 
     public List<BrowseResponseDTO> getUserBookmarks(Integer userId) {
         return planMapper.selectUserBookmarks(userId);
+    }
+
+    @Override
+    public int copyPlanToUser(Integer planId, Integer userId) {
+        // 1️⃣ 기존 일정 확인
+        PlanDetailResponseDTO original = planMapper.selectPlanDetail(planId);
+        if (original == null) {
+            throw new IllegalArgumentException("복사할 일정이 존재하지 않습니다. (planId=" + planId + ")");
+        }
+
+        // 2️⃣ 새 일정 생성
+        PlanCopyDTO copyDTO = new PlanCopyDTO();
+        copyDTO.setSourcePlanId(planId);
+        copyDTO.setUserId(userId);
+        copyDTO.setTitle(original.getTitle() + " (복사본)");
+        copyDTO.setStartDate(original.getStartDate());
+        copyDTO.setEndDate(original.getEndDate());
+
+        planMapper.insertCopiedPlan(copyDTO);
+
+        // 3️⃣ Day + Travel 복사
+        planMapper.copyDurations(planId, copyDTO.getPlanId());
+        planMapper.copyTravels(planId, copyDTO.getPlanId());
+
+        return copyDTO.getPlanId();
     }
 
 }

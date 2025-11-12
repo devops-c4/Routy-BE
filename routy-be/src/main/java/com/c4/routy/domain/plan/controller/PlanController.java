@@ -1,6 +1,7 @@
 package com.c4.routy.domain.plan.controller;
 
 import com.c4.routy.domain.plan.dto.*;
+import com.c4.routy.domain.plan.service.PlanService;
 import com.c4.routy.domain.plan.service.PlanServiceImpl;
 import com.c4.routy.domain.user.websecurity.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.Map;
 @RequestMapping("/api/plans")
 @RequiredArgsConstructor
 public class PlanController {
-    private final PlanServiceImpl planService;
+    private final PlanService planService;
 
 
     // 상세보기 (일정 상세 조회)
@@ -136,6 +137,21 @@ public class PlanController {
         return ResponseEntity.ok(bookmarks);
     }
 
+    // 브라우저 있는 일정을 내 일정으로 가져오기 기능(복사 사용)
+    @PostMapping("/{planId}/copy")
+    public ResponseEntity<Map<String, Object>> copyPlanToMyList(
+            @PathVariable Integer planId,
+            @AuthenticationPrincipal CustomUserDetails user
+    ) {
+        Integer userId = user.getUserNo();
+        int newPlanId = planService.copyPlanToUser(planId, userId);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "일정이 내 일정에 추가되었습니다.");
+        response.put("newPlanId", newPlanId);
+
+        return ResponseEntity.ok(response);
+    }
 }
 
 

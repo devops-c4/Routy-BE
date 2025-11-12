@@ -493,5 +493,60 @@
         ORDER BY b.created_at DESC
     </select>
 
+    <!-- ========================================= -->
+    <!-- 일정 복사 (plan + duration + travel) -->
+    <!-- ========================================= -->
+
+    <!-- 새 일정 기본정보 복사 -->
+    <insert id="insertCopiedPlan" parameterType="com.c4.routy.domain.plan.dto.PlanCopyDTO"
+            useGeneratedKeys="true" keyProperty="planId">
+        INSERT INTO tbl_plan (
+            user_id,
+            plan_title,
+            region_id,
+            start_date,
+            end_date,
+            created_at,
+            is_deleted,
+            is_public
+        )
+        SELECT
+            #{userId},
+            CONCAT(p.plan_title, ' (복사본)'),
+            p.region_id,
+            p.start_date,
+            p.end_date,
+            NOW(),
+            0,
+            0
+        FROM tbl_plan p
+                 JOIN tbl_region r ON p.region_id = r.region_id
+        WHERE p.plan_id = #{sourcePlanId};
+    </insert>
+
+
+    <!-- Day 복사 -->
+    <insert id="copyDurations">
+        INSERT INTO tbl_duration (plan_id, day)
+        SELECT #{newPlanId}, day
+        FROM tbl_duration
+        WHERE plan_id = #{oldPlanId};
+    </insert>
+
+    <!-- Travel 복사 -->
+    <insert id="copyTravels">
+        INSERT INTO tbl_travel (duration_id, place_name, address_name, category_group_name, place_url, travel_order)
+        SELECT
+            d2.duration_id,
+            t.place_name,
+            t.address_name,
+            t.category_group_name,
+            t.place_url,
+            t.travel_order
+        FROM tbl_duration d1
+                 JOIN tbl_travel t ON d1.duration_id = t.duration_id
+                 JOIN tbl_duration d2 ON d2.plan_id = #{newPlanId} AND d2.day = d1.day
+        WHERE d1.plan_id = #{oldPlanId};
+    </insert>
 
 </mapper>

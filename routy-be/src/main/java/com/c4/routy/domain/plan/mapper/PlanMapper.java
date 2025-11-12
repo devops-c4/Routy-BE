@@ -79,4 +79,13 @@ public interface PlanMapper {
 
     List<BrowseResponseDTO> selectUserBookmarks(@Param("userId") int userId);
 
+    void insertCopiedPlan(PlanCopyDTO dto);
+
+    void copyDurations(@Param("oldPlanId") Integer oldPlanId,
+                       @Param("newPlanId") Integer newPlanId);
+
+    void copyTravels(@Param("oldPlanId") Integer oldPlanId,
+                     @Param("newPlanId") Integer newPlanId);
+
+
 }
