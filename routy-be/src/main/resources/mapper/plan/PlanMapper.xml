@@ -16,16 +16,20 @@
         <result property="categoryGroup" column="category_group_name"/>
         <result property="placeUrl" column="place_url"/>
         <result property="tag" column="tag"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
     </resultMap>
+
 
     <!-- Day 단위 일정 묶음 -->
     <resultMap id="PlanDayResult" type="com.c4.routy.domain.plan.dto.PlanDayDTO">
         <id property="dayId" column="duration_id"/>
         <result property="dayNo" column="day"/>
-        <result property="date" column="day_date"/>
+        <result property="date" column="date"/>
         <collection property="activities"
                     ofType="com.c4.routy.domain.plan.dto.PlanActivityDTO"
-                    resultMap="PlanActivityResult"/>
+                    select="selectPlanPlaces"
+                    column="duration_id"/>
     </resultMap>
 
     <!-- 여행 전체 상세 -->
@@ -36,9 +40,49 @@
         <result property="endDate" column="end_date"/>
         <result property="destination" column="region_name"/>
         <result property="theme" column="theme"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="isPublic" column="is_public"/>
         <collection property="dayList"
                     ofType="com.c4.routy.domain.plan.dto.PlanDayDTO"
                     resultMap="PlanDayResult"/>
+    </resultMap>
+
+    <!-- =======================================================
+     브라우저 상세 모달
+    ======================================================= -->
+    <resultMap id="BrowseDetailResult" type="com.c4.routy.domain.plan.dto.BrowseDetailResponseDTO">
+        <id property="planId" column="plan_id"/>
+        <result property="title" column="plan_title"/>
+        <result property="destination" column="region_name"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="days" column="days"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="isPublic" column="is_public"/>
+        <result property="isDeleted" column="is_deleted"/>
+
+        <result property="userId" column="user_no"/>
+        <result property="username" column="username"/>
+        <result property="likeCount" column="like_count"/>
+        <result property="bookmarkCount" column="bookmark_count"/>
+        <result property="viewCount" column="view_count"/>
+
+        <!-- 리뷰 -->
+        <association property="review"
+                     javaType="com.c4.routy.domain.plan.dto.BrowseReviewModalDTO">
+            <id property="reviewId" column="review_id"/>
+            <result property="content" column="review_content"/>
+            <result property="createdAt" column="review_created"/>
+            <result property="rating" column="review_rating"/>
+            <result property="username" column="review_username"/>
+            <result property="images" column="review_images"/>
+        </association>
+
+        <!-- Day 목록 -->
+        <collection property="dayList"
+                    ofType="com.c4.routy.domain.plan.dto.PlanDayDTO"
+                    select="selectPlanDays"
+                    column="plan_id"/>
     </resultMap>
 
 
@@ -60,7 +104,9 @@
             t.place_name AS place_name,
             t.address_name,
             t.category_group_name,
-            t.place_url
+            t.place_url,
+            t.start_time,
+            t.end_time
         FROM TBL_PLAN p
                  LEFT JOIN TBL_REGION r ON p.region_id = r.region_id
                  LEFT JOIN TBL_DURATION d ON p.plan_id = d.plan_id
@@ -87,7 +133,282 @@
                  LEFT JOIN TBL_TRANSPORT tr ON p.plan_id = tr.plan_id
         WHERE p.user_id = #{userId}
           AND p.is_deleted = 0
-        ORDER BY p.start_time ASC
+        ORDER BY p.start_date ASC
     </select>
+
+
+
+
+    <select id="selectReviewForm"
+            parameterType="int"
+            resultMap="PlanReviewFormResult">
+        SELECT
+            p.plan_id,
+            p.plan_title,
+            r.review_id,
+            r.review_content,
+            r.rating,
+            rf.reviewfile_id,
+            rf.file_name,
+            rf.file_path,
+            rf.file_rename
+        FROM TBL_PLAN p
+                 LEFT JOIN TBL_REVIEW r ON p.plan_id = r.plan_id
+                 LEFT JOIN TBL_REVIEWFILES rf ON r.review_id = rf.review_id
+        WHERE p.plan_id = #{planId}
+          AND (r.is_deleted IS NULL OR r.is_deleted = 0)
+    </select>
+
+    <!-- =======================================================
+         ResultMap: PlanReviewFormDTO + ReviewFileDTO
+         ======================================================= -->
+    <resultMap id="PlanReviewFormResult" type="com.c4.routy.domain.plan.dto.PlanReviewFormDTO">
+        <id property="reviewId" column="review_id"/>
+        <result property="planId" column="plan_id"/>
+        <result property="planTitle" column="plan_title"/>
+        <result property="content" column="review_content"/>
+        <result property="rating" column="rating"/>
+
+        <collection property="files"
+                    ofType="com.c4.routy.domain.plan.dto.ReviewFileDTO">
+            <id property="reviewFileId" column="reviewfile_id"/>
+            <result property="fileName" column="file_name"/>
+            <result property="filePath" column="file_path"/>
+            <result property="fileRename" column="file_rename"/>
+        </collection>
+    </resultMap>
+
+
+
+    <!-- =======================================================
+          일정 수정 화면용 (PlanEditResponseDTO 세트)
+         ======================================================= -->
+
+    <!-- 1) 수정화면에서 하루 안의 장소들 -->
+    <resultMap id="PlanEditActivityResult" type="com.c4.routy.domain.plan.dto.PlanEditActivityDTO">
+        <id property="travelId" column="travel_id"/>
+        <result property="placeName" column="place_name"/>
+        <result property="addressName" column="address_name"/>
+        <result property="categoryGroupName" column="category_group_name"/>
+        <result property="placeUrl" column="place_url"/>
+<!--        <result property="tag" column="tag"/>-->
+        <result property="orderNo" column="travel_order"/>
+    </resultMap>
+
+    <!-- 2) 수정화면 Day -->
+    <resultMap id="PlanEditDayResult" type="com.c4.routy.domain.plan.dto.PlanEditDayDTO">
+        <id property="dayId" column="duration_id"/>
+        <result property="dayNo" column="day"/>
+        <result property="date" column="day_date"/>
+        <collection property="activities"
+                    ofType="com.c4.routy.domain.plan.dto.PlanEditActivityDTO"
+                    resultMap="PlanEditActivityResult"/>
+    </resultMap>
+
+    <!-- 3) 수정화면 전체 -->
+    <resultMap id="PlanEditResult" type="com.c4.routy.domain.plan.dto.PlanEditResponseDTO">
+        <id property="planId" column="plan_id"/>
+        <result property="title" column="plan_title"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="destination" column="region_name"/>
+<!--        <result property="theme" column="theme"/>-->
+        <collection property="dayList"
+                    ofType="com.c4.routy.domain.plan.dto.PlanEditDayDTO"
+                    resultMap="PlanEditDayResult"/>
+    </resultMap>
+
+    <!--  실제 쿼리 -->
+    <select id="selectPlanEdit" parameterType="int" resultMap="PlanEditResult">
+        SELECT
+            p.plan_id,
+            p.plan_title,
+            p.start_date,
+            p.end_date,
+            r.region_name,
+--             r.theme,
+            d.duration_id,
+            d.day,
+            DATE_ADD(p.start_date, INTERVAL (d.day - 1) DAY) AS day_date,
+            t.travel_id,
+            t.place_name AS place_name,
+            t.address_name AS address_name,
+            t.category_group_name AS category_group_name,
+            t.place_url AS place_url,
+--             t.tag AS tag,
+            t.travel_order AS travel_order
+        FROM TBL_PLAN p
+                 LEFT JOIN TBL_REGION  r ON p.region_id = r.region_id
+                 LEFT JOIN TBL_DURATION d ON p.plan_id    = d.plan_id
+                 LEFT JOIN TBL_TRAVEL  t ON d.duration_id = t.duration_id
+        WHERE p.plan_id = #{planId}
+        ORDER BY d.day ASC, t.travel_order ASC
+    </select>
+
+    <!-- =======================================================
+     좋아요 관련 쿼리
+     ======================================================= -->
+    <!-- 1. 특정 유저가 해당 계획을 좋아요 눌렀는지 확인 -->
+    <select id="checkUserLike" resultType="boolean">
+        SELECT COUNT(*) > 0
+        FROM tbl_like
+        WHERE plan_id = #{planId}
+          AND user_id = #{userId}
+    </select>
+
+    <!-- 2. 좋아요 추가 -->
+    <insert id="insertLike">
+        INSERT INTO tbl_like (plan_id, user_id)
+        VALUES (#{planId}, #{userId})
+    </insert>
+
+    <!-- 3. 좋아요 삭제 -->
+    <delete id="deleteLike">
+        DELETE FROM tbl_like
+        WHERE plan_id = #{planId}
+          AND user_id = #{userId}
+    </delete>
+
+    <!-- 4. 특정 계획의 좋아요 개수 -->
+    <select id="countLikes" resultType="int">
+        SELECT COUNT(*) FROM tbl_like
+        WHERE plan_id = #{planId}
+    </select>
+
+    <!-- ========================================= -->
+    <!-- 지역 목록 조회 -->
+    <!-- ========================================= -->
+    <select id="selectAllRegions" resultType="com.c4.routy.domain.plan.dto.RegionResponseDTO">
+        SELECT
+            region_id AS regionId,
+            region_name AS regionName
+        FROM tbl_region
+        ORDER BY region_id
+    </select>
+
+    <!-- 작성자 ID 조회 -->
+    <select id="selectPlanAuthorId" resultType="int">
+        SELECT user_id
+        FROM tbl_plan
+        WHERE plan_id = #{planId}
+    </select>
+
+    <!-- 조회수 증가 -->
+    <update id="incrementViewCount">
+        UPDATE tbl_plan
+        SET view_count = view_count + 1
+        WHERE plan_id = #{planId}
+    </update>
+
+    <!-- 북마크 여부 확인 -->
+    <select id="checkUserBookmark" resultType="boolean">
+        SELECT COUNT(*) > 0
+        FROM tbl_bookmark
+        WHERE plan_id = #{planId} AND user_id = #{userId}
+    </select>
+
+    <!-- 북마크 추가 -->
+    <insert id="insertBookmark">
+        INSERT INTO tbl_bookmark (plan_id, user_id, created_at)
+        VALUES (#{planId}, #{userId}, NOW())
+    </insert>
+
+    <!-- 북마크 삭제 -->
+    <delete id="deleteBookmark">
+        DELETE FROM tbl_bookmark
+        WHERE plan_id = #{planId} AND user_id = #{userId}
+    </delete>
+
+    <!-- 북마크 개수 -->
+
+    <select id="countBookmarks" resultType="int">
+        SELECT COUNT(*) FROM tbl_bookmark WHERE plan_id = #{planId}
+    </select>
+
+    <!-- 북마크 개수 tbl_plan에 반영 -->
+    <update id="updateBookmarkCount">
+        UPDATE tbl_plan
+        SET bookmark_count = (
+            SELECT COUNT(*) FROM tbl_bookmark WHERE plan_id = #{planId}
+        )
+        WHERE plan_id = #{planId}
+    </update>
+
+    <!-- 내가 북마크한 일정 목록 -->
+    <select id="selectUserBookmarks" resultType="com.c4.routy.domain.plan.dto.BrowseResponseDTO">
+        SELECT
+            p.plan_id AS planId,
+            p.plan_title AS title,
+            r.region_name AS destination,
+            DATE_FORMAT(p.start_date, '%Y-%m-%d') AS startDate,
+            DATE_FORMAT(p.end_date, '%Y-%m-%d') AS endDate,
+            DATEDIFF(p.end_date, p.start_date) + 1 AS days,
+            u.username AS userNickname,
+            p.bookmark_count AS bookmarkCount,
+            p.view_count AS viewCount,
+            (SELECT COUNT(*) FROM tbl_like l WHERE l.plan_id = p.plan_id) AS likeCount
+        FROM tbl_bookmark b
+                 JOIN tbl_plan p ON b.plan_id = p.plan_id
+                 JOIN tbl_user u ON u.user_no = p.user_id
+                 JOIN tbl_region r ON r.region_id = p.region_id
+        WHERE b.user_id = #{userId}
+        ORDER BY b.created_at DESC
+    </select>
+
+    <!-- ========================================= -->
+    <!-- 일정 복사 (plan + duration + travel) -->
+    <!-- ========================================= -->
+
+    <!-- 새 일정 기본정보 복사 -->
+    <insert id="insertCopiedPlan" parameterType="com.c4.routy.domain.plan.dto.PlanCopyDTO"
+            useGeneratedKeys="true" keyProperty="planId">
+        INSERT INTO tbl_plan (
+            user_id,
+            plan_title,
+            region_id,
+            start_date,
+            end_date,
+            created_at,
+            is_deleted,
+            is_public
+        )
+        SELECT
+            #{userId},
+            CONCAT(p.plan_title, ' (복사본)'),
+            p.region_id,
+            p.start_date,
+            p.end_date,
+            NOW(),
+            0,
+            0
+        FROM tbl_plan p
+                 JOIN tbl_region r ON p.region_id = r.region_id
+        WHERE p.plan_id = #{sourcePlanId};
+    </insert>
+
+
+    <!-- Day 복사 -->
+    <insert id="copyDurations">
+        INSERT INTO tbl_duration (plan_id, day)
+        SELECT #{newPlanId}, day
+        FROM tbl_duration
+        WHERE plan_id = #{oldPlanId};
+    </insert>
+
+    <!-- Travel 복사 -->
+    <insert id="copyTravels">
+        INSERT INTO tbl_travel (duration_id, place_name, address_name, category_group_name, place_url, travel_order)
+        SELECT
+            d2.duration_id,
+            t.place_name,
+            t.address_name,
+            t.category_group_name,
+            t.place_url,
+            t.travel_order
+        FROM tbl_duration d1
+                 JOIN tbl_travel t ON d1.duration_id = t.duration_id
+                 JOIN tbl_duration d2 ON d2.plan_id = #{newPlanId} AND d2.day = d1.day
+        WHERE d1.plan_id = #{oldPlanId};
+    </insert>
 
 </mapper>
