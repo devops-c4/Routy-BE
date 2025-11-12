@@ -518,7 +518,7 @@
             p.end_date,
             NOW(),
             0,
-            0
+            1
         FROM tbl_plan p
                  JOIN tbl_region r ON p.region_id = r.region_id
         WHERE p.plan_id = #{sourcePlanId};
