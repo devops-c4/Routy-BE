@@ -47,4 +47,10 @@ public class TravelEntity {
 
     @Column(name = "end_time")
     private String endTime;
+
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name ="longitude")
+    private Double longitude;
 }
