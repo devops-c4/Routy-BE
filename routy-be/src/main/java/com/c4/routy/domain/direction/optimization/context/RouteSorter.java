@@ -16,12 +16,12 @@ public class RouteSorter {
         this.strategy = strategy;
     }
 
-    public List<Location> sort(List<Location> locations) {
+    public List<Location> sort(List<Location> locations, List<Integer> fixed, int[][] weight) {
 
         log.info("정렬 전: {}", locations);                // 정렬 전 순서
         
         long start = System.currentTimeMillis();          // 시작 시간 (밀리초)
-        List<Location> result = strategy.sort(locations);
+        List<Location> result = strategy.sort(locations, fixed, weight);
         long end = System.currentTimeMillis();            // 끝 시간 (밀리초)
         
         log.info("정렬 후: {}", result);                   // 정렬 후 순서

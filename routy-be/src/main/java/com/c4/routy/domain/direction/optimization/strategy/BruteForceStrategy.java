@@ -2,14 +2,70 @@ package com.c4.routy.domain.direction.optimization.strategy;
 
 import com.c4.routy.domain.direction.dto.KakaoMobility.Location;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class BruteForceStrategy implements RouteStrategy {
+// 완전 탐색 정렬
+public class BruteForceStrategy extends RouteStrategy {
     @Override
-    public List<Location> sort(List<Location> locations) {
+    protected List<Integer> findOptimalOrder(List<Integer> fixed, int[][] wights) {
+        int n = wights.length;
 
+        // 1. 고정되지 않은 인덱스 수집
+        List<Integer> unfixed = new ArrayList<>();
+        for(int i = 0;i < n; i++) {
+            if(!fixed.contains(i)) unfixed.add(i);
+        }
 
+        // 2. 고정되지 않은 부분의 모든 순열 생성
+        List<List<Integer>> permutations = new ArrayList<>();
+        permute(unfixed, 0, permutations);
 
-        return List.of();
+        int bestTime = Integer.MAX_VALUE;
+        List<Integer> bestOrder = null;
+
+        // 각 순열에 대해 총 이동 시간 계산
+        for (List<Integer> perm : permutations) {
+            List<Integer> order = new ArrayList<>(Collections.nCopies(n, -1));
+            int permIdx = 0;
+
+            // 1. 고정 지점은 그대로 유지
+            for (int fixedIdx : fixed) {
+                order.set(fixedIdx, fixedIdx);
+            }
+
+            // 2. 나머지 자리에 순열 값 채우기
+            for (int i = 0; i < n; i++) {
+                if (!fixed.contains(i)) {
+                    order.set(i, perm.get(permIdx++));
+                }
+            }
+
+            // 3. 총 이동 시간 계산
+            int total = 0;
+            for (int i = 0; i < n - 1; i++) {
+                total += wights[order.get(i)][order.get(i + 1)];
+            }
+
+            if (total < bestTime) {
+                bestTime = total;
+                bestOrder = new ArrayList<>(order);
+            }
+        }
+
+        return bestOrder;
+    }
+
+    private void permute(List<Integer> arr, int k, List<List<Integer>> result) {
+        if (k == arr.size()) {
+            result.add(new ArrayList<>(arr));
+        } else {
+            for (int i = k; i < arr.size(); i++) {
+                Collections.swap(arr, i, k);
+                permute(arr, k + 1, result);
+                Collections.swap(arr, i, k);
+            }
+        }
     }
 }
