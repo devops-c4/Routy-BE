@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor
-public class PlaceEntity {
+public class PlaceResponseDTO {
 
     private Integer travelId;
     private Integer travelOrder;
@@ -24,4 +24,6 @@ public class PlaceEntity {
     private String imagePath;
     private String runTime;
     private Integer durationId;
+    private String startTime;
+    private String endTime;
 }

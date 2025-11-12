@@ -25,20 +25,26 @@ public class TravelEntity {
     private DurationEntity duration;
 
     @Column(name = "place_name")
-    private String placeName;           // 장소이름
+    private String placeName;           // 장소 이름
 
-    @Column(name = "address_name")       //주소
+    @Column(name = "address_name")      // 주소
     private String addressName;
 
     @Column(name = "category_group_name")
     private String categoryGroupName;
 
-    @Column(name = "place_url")       // 장소url
+    @Column(name = "place_url")         // 장소 url
     private String placeUrl;
 
     @Column(name = "tag")
-    private String tag;                 // 숙소/식당/관광...
+    private String tag;                 // 숙소/ 식당/ 관광명소/ 숙빅
 
     @Column(name = "travel_order")
-    private Integer travelOrder;
+    private Integer travelOrder;        // travel 순서
+
+    @Column(name = "start_time")
+    private Integer startTime;
+
+    @Column(name = "end_time")
+    private Integer endTime;
 }
