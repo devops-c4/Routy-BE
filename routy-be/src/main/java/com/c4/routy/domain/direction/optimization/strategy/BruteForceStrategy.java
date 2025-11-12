@@ -6,15 +6,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// 완전 탐색 정렬
+/**
+ * 완전 탐색 전략 (Brute Force)
+ * n! 순열 계산으로 최적 경로 탐색
+ * n <= 10 정도에만 사용
+ */
 public class BruteForceStrategy extends RouteStrategy {
     public BruteForceStrategy(List<Location> locations, List<Integer> fixed, int[][] weight) {
         super(locations, fixed, weight);
     }
 
     @Override
-    protected List<Integer> findOptimalOrder(List<Integer> fixed, int[][] wights) {
-        int n = wights.length;
+    protected List<Integer> findOptimalOrder() {
+        int n = weights.length;
 
         // 1. 고정되지 않은 인덱스 수집
         List<Integer> unfixed = new ArrayList<>();
@@ -49,7 +53,7 @@ public class BruteForceStrategy extends RouteStrategy {
             // 3. 총 이동 시간 계산
             int total = 0;
             for (int i = 0; i < n - 1; i++) {
-                total += wights[order.get(i)][order.get(i + 1)];
+                total += weights[order.get(i)][order.get(i + 1)];
             }
 
             if (total < bestTime) {

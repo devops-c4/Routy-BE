@@ -1,10 +1,7 @@
 package com.c4.routy.domain.direction.optimization.factory;
 
 import com.c4.routy.domain.direction.dto.KakaoMobility.Location;
-import com.c4.routy.domain.direction.optimization.strategy.BitmaskStrategy;
-import com.c4.routy.domain.direction.optimization.strategy.BruteForceStrategy;
-import com.c4.routy.domain.direction.optimization.strategy.HeuristicStrategy;
-import com.c4.routy.domain.direction.optimization.strategy.RouteStrategy;
+import com.c4.routy.domain.direction.optimization.strategy.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -12,34 +9,46 @@ import java.util.List;
 @Slf4j
 public class RouteStrategyFactory {
 
-
-    // 일정 개수 N에 따라서 다른 클래스를 반환해줌
+    /**
+     * 노드 수와 모드에 따라 적절한 RouteStrategy 반환
+     * mode = 0 : 자동 선택
+     * mode = 1~5 : 테스트용 강제 선택
+     */
     public static RouteStrategy getRouteStrategy(List<Location> locations,
                                                  List<Integer> fixed,
                                                  int[][] weight,
-                                                 int mode) {        // 0 입력시 실사용, 1~3: 테스트
-        // 실제 사용
-        if(mode == 0) {
-            int n = locations.size();
+                                                 int mode) {
+        int n = locations.size();
 
+        if (mode == 0) { // 자동 선택
             if (n <= 10) {
+                log.info("정렬 방법: 완전탐색");
                 return new BruteForceStrategy(locations, fixed, weight);
-            } else if (n <= 15) {
-                return new BitmaskStrategy(locations, fixed, weight);
-            } else {
-                return new HeuristicStrategy(locations, fixed, weight);
             }
-        } else {
+            else if (n <= 15) {
+                log.info("정렬 방법: DP탐색");
+                return new DPStrategy(locations, fixed, weight);
+            }
+//            else if (n <= 25) {
+            else {
+                log.info("정렬 방법: 탐욕적 탐색");
+                return new GreedyStrategy(locations, fixed, weight);
+            } // Greedy + 2-opt
+//            else if (n <= 40) {
+//                log.info("정렬 방법: 2-opt");
+//                return new TwoOptStrategy(locations, fixed, weight);
+//            } // 2-opt Local Search
+//            else {
+//                log.info("정렬 방법: Genetic");
+//                return new GeneticStrategy(locations, fixed, weight);
+//            }             // Genetic
+        } else { // 테스트 모드
             switch (mode) {
-                case 1 -> {
-                    return new BruteForceStrategy(locations, fixed, weight);    // 완점 탐색
-                }
-                case 2 -> {
-                    return new BitmaskStrategy(locations, fixed, weight);       // Bitmask DP
-                }
-                case 3 -> {
-                    return new HeuristicStrategy(locations, fixed, weight);     // Heuristic
-                }
+                case 1 -> { return new BruteForceStrategy(locations, fixed, weight); }
+                case 2 -> { return new DPStrategy(locations, fixed, weight); }
+                case 3 -> { return new GreedyStrategy(locations, fixed, weight); }
+//                case 4 -> { return new TwoOptStrategy(locations, fixed, weight); }
+//                case 5 -> { return new GeneticStrategy(locations, fixed, weight); }
                 default -> {
                     log.info("모드 설정이 잘못되었습니다.");
                     throw new IllegalArgumentException("모드 설정이 잘못 되었습니다.");

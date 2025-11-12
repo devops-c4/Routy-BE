@@ -9,17 +9,17 @@ import java.util.List;
 public abstract  class RouteStrategy {
     protected List<Location> locations;
     protected List<Integer> fixed;
-    protected int[][] weight;
+    protected int[][] weights;
 
-    public RouteStrategy(List<Location> locations, List<Integer> fixed, int[][] weight) {
+    public RouteStrategy(List<Location> locations, List<Integer> fixed, int[][] weights) {
         this.locations = locations;
         this.fixed = fixed;
-        this.weight = weight;
+        this.weights = weights;
     }
 
     public List<Location> sort() {
         // 1. 최적 경로 탐색
-        List<Integer> bestOrder = findOptimalOrder(this.fixed, this.weight);
+        List<Integer> bestOrder = findOptimalOrder();
 
         // 2. 순서에 따라 Location 정렬 후 반환
         return bestOrder.stream()
@@ -28,5 +28,5 @@ public abstract  class RouteStrategy {
     }
 
     // 구현체에서만 오버라이드
-    protected abstract List<Integer> findOptimalOrder(List<Integer> fixed, int[][] weight);
+    protected abstract List<Integer> findOptimalOrder();
 }
