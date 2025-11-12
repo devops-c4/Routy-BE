@@ -40,5 +40,17 @@ public class TravelEntity {
 //    private String tag;                 // 숙소/식당/관광...
 
     @Column(name = "travel_order")
-    private Integer travelOrder;
+    private Integer travelOrder;        // travel 순서
+
+    @Column(name = "start_time")
+    private String startTime;
+
+    @Column(name = "end_time")
+    private String endTime;
+
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name ="longitude")
+    private Double longitude;
 }
