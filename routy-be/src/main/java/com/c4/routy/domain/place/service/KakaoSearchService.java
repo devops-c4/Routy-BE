@@ -1,7 +1,7 @@
 package com.c4.routy.domain.place.service;
 
 import com.c4.routy.domain.place.dto.KakaoPlaceResponse;
-import com.c4.routy.domain.place.dto.RestaurantSearchRequest;
+import com.c4.routy.domain.place.dto.KakaoSearchRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Slf4j
 @Service
-public class KakaoPlaceService {
+public class KakaoSearchService {
 
     @Value("${kakao.api-key}")
     private String kakaoApiKey;
@@ -22,14 +22,14 @@ public class KakaoPlaceService {
 
     private final RestTemplate restTemplate;
 
-    public KakaoPlaceService(RestTemplate restTemplate) {
+    public KakaoSearchService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     /**
      * 카카오 API로 맛집 검색
      */
-    public KakaoPlaceResponse searchRestaurants(RestaurantSearchRequest request) {
+    public KakaoPlaceResponse searchRestaurants(KakaoSearchRequest request) {
         try {
             // URL 빌드
             String url = buildSearchUrl(request);
@@ -61,7 +61,7 @@ public class KakaoPlaceService {
     /**
      * 카테고리로 맛집 검색 (음식점 카테고리만)
      */
-    public KakaoPlaceResponse searchRestaurantsByCategory(RestaurantSearchRequest request) {
+    public KakaoPlaceResponse searchRestaurantsByCategory(KakaoSearchRequest request) {
         request.setCategory("FD6"); // 음식점 카테고리 코드
         return searchRestaurants(request);
     }
@@ -70,7 +70,7 @@ public class KakaoPlaceService {
      * 위치 기반 주변 맛집 검색
      */
     public KakaoPlaceResponse searchNearbyRestaurants(String x, String y, Integer radius, Integer page, Integer size) {
-        RestaurantSearchRequest request = new RestaurantSearchRequest();
+        KakaoSearchRequest request = new KakaoSearchRequest();
         request.setQuery("맛집");
         request.setCategory("FD6");
         request.setX(x);
@@ -85,7 +85,7 @@ public class KakaoPlaceService {
     /**
      * URL 빌드
      */
-    private String buildSearchUrl(RestaurantSearchRequest request) {
+    private String buildSearchUrl(KakaoSearchRequest request) {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(KAKAO_LOCAL_SEARCH_API)
                 .queryParam("query", request.getQuery())
                 .queryParam("page", request.getPage())
