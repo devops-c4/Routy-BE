@@ -170,7 +170,7 @@ public class PlanServiceImpl implements PlanService {
 
             // 2) 리뷰 이미지가 아예 없는 경우 → 기본 이미지 1개 삽입
             if (dto.getReviewImages().isEmpty()) {
-                dto.setReviewImages(List.of(defaultPlanImage));
+                dto.setReviewImages(List.of(dto.getDefaultPlanImage()));
             }
         }
         log.info("fltmxmdhskfhdskh {}",list);
