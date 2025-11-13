@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -22,5 +24,9 @@ public class BrowseResponseDTO {
     private Integer viewCount;       // 조회 수 (tbl_plan.view_count)
     private Boolean isPublic;        // 공개 여부
     private Integer placeCount;      // 총 day 별 총 일정 수
+    private Boolean isBookmarked;    // 북마크 확인 여부
+    private List<String> reviewImages;  // 리뷰에 저장되는 많은 사진
+    private String reviewImagesRaw;
+    private String defaultPlanImage;
 }
 
