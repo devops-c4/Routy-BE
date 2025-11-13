@@ -23,6 +23,12 @@ public class AuthController {
 
     private final AuthService authService;
 
+    // health check
+    @GetMapping("/health")
+    public String health(){
+        return "Routy 서버 동작 중....";
+    }
+
     // 로그아웃
     @PostMapping("/logout")
     public ResponseEntity<ResponseLogoutDTO> logout(HttpServletResponse response) {
