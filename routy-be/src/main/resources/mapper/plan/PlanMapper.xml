@@ -95,8 +95,10 @@
             p.plan_title,
             p.start_date,
             p.end_date,
-            p.theme,
             r.region_name,
+            r.theme,
+            p.is_public,
+            p.is_deleted,
             d.duration_id,
             d.day,
             DATE_ADD(p.start_date, INTERVAL (d.day - 1) DAY) AS day_date,
@@ -166,20 +168,23 @@
         SELECT
         p.plan_id AS planId,
         p.plan_title AS title,
-        p.theme AS theme,
         r.region_name AS destination,
         DATE_FORMAT(p.start_date, '%Y-%m-%d') AS startDate,
         DATE_FORMAT(p.end_date, '%Y-%m-%d') AS endDate,
         DATEDIFF(p.end_date, p.start_date) + 1 AS days,
-        u.username AS userNickname,
+        COUNT(DISTINCT t.travel_id) AS placeCount,
+        MAX(u.username) AS userNickname,
         COUNT(l.like_id) AS likeCount,
         p.bookmark_count AS bookmarkCount,
         p.view_count AS viewCount,
-        p.is_public AS isPublic
+        p.is_public AS isPublic,
+        p.created_at AS createdAt
         FROM TBL_PLAN p
         JOIN TBL_USER u ON u.user_no = p.user_id
         JOIN TBL_REGION r ON r.region_id = p.region_id
         LEFT JOIN TBL_LIKE l ON l.plan_id = p.plan_id
+        LEFT JOIN TBL_DURATION d ON d.plan_id = p.plan_id
+        LEFT JOIN TBL_TRAVEL t ON t.duration_id = d.duration_id
         WHERE p.is_deleted = 0
         AND p.is_public = 0
         <if test="regionId != null">
@@ -195,9 +200,11 @@
                 </otherwise>
             </choose>
         </if>
-        GROUP BY p.plan_id, p.plan_title, p.theme, r.region_name, p.start_date, p.end_date,
-        u.username, p.bookmark_count, p.view_count, p.is_public
+        GROUP BY p.plan_id
         <choose>
+            <when test="sort == 'latest'">
+                ORDER BY p.created_at DESC, p.plan_id DESC
+            </when>
             <when test="sort == 'bookmark'">
                 ORDER BY p.bookmark_count DESC
             </when>
@@ -212,7 +219,8 @@
     </select>
 
     <!-- 브라우저 모달 쿼리 -->
-    <select id="selectPublicPlanDetail" resultMap="BrowseDetailResult">
+    <select id="selectPublicPlanDetail"
+            resultMap="BrowseDetailResult">
         SELECT
             p.plan_id,
             p.plan_title,
@@ -253,7 +261,8 @@
     </select>
 
     <!-- Day 및 장소 -->
-    <select id="selectPlanDays" resultMap="PlanDayResult">
+    <select id="selectPlanDays"
+            resultMap="PlanDayResult">
         SELECT
             d.duration_id,
             d.day,
@@ -265,7 +274,8 @@
     </select>
 
     <!-- 시간 정보 추가 -->
-    <select id="selectPlanPlaces" resultType="com.c4.routy.domain.plan.dto.PlanActivityDTO">
+    <select id="selectPlanPlaces"
+            resultType="com.c4.routy.domain.plan.dto.PlanActivityDTO">
         SELECT
             t.travel_id AS travelId,
             t.place_name AS placeName,
@@ -283,7 +293,9 @@
         ORDER BY t.travel_order ASC
     </select>
 
-    <select id="selectReviewForm" parameterType="int" resultMap="PlanReviewFormResult">
+    <select id="selectReviewForm"
+            parameterType="int"
+            resultMap="PlanReviewFormResult">
         SELECT
             p.plan_id,
             p.plan_title,
@@ -358,7 +370,6 @@
         <result property="startDate" column="start_date"/>
         <result property="endDate" column="end_date"/>
         <result property="destination" column="region_name"/>
-        <result property="theme" column="theme"/>
         <collection property="dayList"
                     ofType="com.c4.routy.domain.plan.dto.PlanEditDayDTO"
                     resultMap="PlanEditDayResult"/>
@@ -527,8 +538,8 @@
             #{userId},
             CONCAT(p.plan_title, ' (복사본)'),
             p.region_id,
-            p.start_date,
-            p.end_date,
+            COALESCE(#{startDate}, p.start_date),
+            COALESCE(#{endDate}, p.end_date),
             p.theme,
             NOW(),
             0,
