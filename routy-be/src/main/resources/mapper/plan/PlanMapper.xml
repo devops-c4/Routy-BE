@@ -96,7 +96,7 @@
             p.start_date,
             p.end_date,
             r.region_name,
-            r.theme,
+            p.theme,
             p.is_public,
             p.is_deleted,
             d.duration_id,
