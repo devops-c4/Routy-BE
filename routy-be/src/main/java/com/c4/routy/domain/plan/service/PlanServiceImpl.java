@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -148,34 +150,56 @@ public class PlanServiceImpl implements PlanService {
     // 헤더 부분에 있는 여행 루트 둘러러보기
     @Override
     public List<BrowseResponseDTO> getPublicPlans(String sort, Integer regionId, Integer days) {
-        return planMapper.selectPublicPlans(regionId, days, sort);
+
+        List<BrowseResponseDTO> list = planMapper.selectPublicPlans(regionId, days, sort);
+
+        // reviewImagesRaw를 List<String>로 변환
+        for (BrowseResponseDTO dto : list) {
+            String raw = dto.getReviewImagesRaw();
+
+            if (raw != null && !raw.isBlank()) {
+                // 콤마 기준으로 나누기
+                List<String> imgs = List.of(raw.split(","));
+
+                // DTO에 저장
+                dto.setReviewImages(imgs);
+            } else {
+                // 이미지 없으면 빈 리스트 세팅
+                dto.setReviewImages(List.of());
+            }
+        }
+
+        return list;
     }
 
 
     //브라우저 카드 일정 상세 조회 (모달용)
     @Override
     public BrowseDetailResponseDTO getPublicPlanDetail(Integer planId) {
-        // 기본 정보 및 리뷰
-        BrowseDetailResponseDTO dto = planMapper.selectPublicPlanDetail(planId);
-        if (dto == null) return null;
 
-        // 리뷰 이미지 문자열 변환
-        if (dto.getReview() != null && dto.getReview().getImages() != null) {
-            Object imgField = dto.getReview().getImages();
-            if (imgField instanceof String imgStr) {
-                dto.getReview().setImages(imgStr);
-            }
+        // 1) 기본 상세 조회 (plan 정보 + days)
+        BrowseDetailResponseDTO detail = planMapper.selectPublicPlanDetail(planId);
+        if (detail == null) {
+            throw new IllegalArgumentException("해당 일정이 존재하지 않습니다. planId=" + planId);
         }
 
-        // Day 및 장소 목록 구성
-        List<PlanDayDTO> dayList = planMapper.selectPlanDays(planId);
-        for (PlanDayDTO day : dayList) {
-            day.setActivities(planMapper.selectPlanPlaces(day.getDayId()));  // ✅ 수정됨
-        }
-        dto.setDayList(dayList);
+        // 2) 리뷰 + 리뷰 이미지 조회 (별도 쿼리)
+        BrowseReviewModalDTO review = planMapper.selectPlanReview(planId);
 
-        return dto;
+        // 3) 이미지 파싱 (콤마 문자열 → 리스트)
+        if (review != null && review.getImages() != null) {
+            String[] split = review.getImages().split(",");
+            review.setImageList(Arrays.asList(split));
+        } else {
+            review.setImageList(Collections.emptyList());
+        }
+
+        // 4) 최종 상세 객체에 review 세팅
+        detail.setReview(review);
+
+        return detail;
     }
+
 
     // 브라우저 모달 창 좋아요 토글
     @Override

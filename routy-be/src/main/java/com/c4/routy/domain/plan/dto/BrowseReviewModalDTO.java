@@ -22,4 +22,5 @@ public class BrowseReviewModalDTO {
     private Integer rating;    // 별점
     private String username;   // 작성자 이름
     private String images;
+    private List<String> imageList;
 }

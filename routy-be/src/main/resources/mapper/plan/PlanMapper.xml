@@ -164,7 +164,8 @@
     (상세 일정은 DTO 내부에서 다른 DTO를 호출하기 때문에 자동 매핑을 했지만,
      브라우저는 DTO 호출 없디 단순하기 때문에 명시적 매핑을 진행)
     ======================================================= -->
-    <select id="selectPublicPlans" resultType="com.c4.routy.domain.plan.dto.BrowseResponseDTO">
+    <select id="selectPublicPlans"
+            resultType="com.c4.routy.domain.plan.dto.BrowseResponseDTO">
         SELECT
         p.plan_id AS planId,
         p.plan_title AS title,
@@ -178,15 +179,26 @@
         p.bookmark_count AS bookmarkCount,
         p.view_count AS viewCount,
         p.is_public AS isPublic,
-        p.created_at AS createdAt
+        p.created_at AS createdAt,
+        <!-- 리뷰 이미지 여러 개 (콤마로 이어붙임) -->
+        GROUP_CONCAT(f.file_path ORDER BY f.reviewfile_id) AS reviewImages
         FROM TBL_PLAN p
         JOIN TBL_USER u ON u.user_no = p.user_id
         JOIN TBL_REGION r ON r.region_id = p.region_id
         LEFT JOIN TBL_LIKE l ON l.plan_id = p.plan_id
         LEFT JOIN TBL_DURATION d ON d.plan_id = p.plan_id
         LEFT JOIN TBL_TRAVEL t ON t.duration_id = d.duration_id
+        <!--  리뷰 조인 -->
+        LEFT JOIN TBL_REVIEW rv
+        ON rv.plan_id = p.plan_id
+        AND rv.is_deleted = 0
+        <!-- 리뷰 이미지 조인 -->
+        LEFT JOIN TBL_REVIEWFILES f
+        ON f.review_id = rv.review_id
+        AND f.is_deleted = 0
         WHERE p.is_deleted = 0
         AND p.is_public = 0
+        <!-- 필터링 조건 -->
         <if test="regionId != null">
             AND p.region_id = #{regionId}
         </if>
@@ -201,6 +213,7 @@
             </choose>
         </if>
         GROUP BY p.plan_id
+        <!-- 정렬조건 -->
         <choose>
             <when test="sort == 'latest'">
                 ORDER BY p.created_at DESC, p.plan_id DESC
@@ -216,6 +229,7 @@
             </otherwise>
         </choose>
     </select>
+
 
 
     <!-- 브라우저 모달 쿼리 -->
@@ -404,6 +418,38 @@
         WHERE p.plan_id = #{planId}
         ORDER BY d.day ASC, t.travel_order ASC
     </select>
+
+    <!-- =======================================================
+     리뷰 + 리뷰 이미지 단독 조회 (브라우저 상세 전용)
+======================================================= -->
+    <select id="selectPlanReview"
+            parameterType="int"
+            resultType="com.c4.routy.domain.plan.dto.BrowseReviewModalDTO">
+
+        SELECT
+            rv.review_id AS reviewId,
+            rv.plan_id AS planId,
+            rv.content AS content,
+            rv.rating AS rating,
+            DATE_FORMAT(rv.created_at, '%Y-%m-%d') AS createdAt,
+            u.username AS username,
+
+            -- 여러 이미지 콤마로 묶기
+            GROUP_CONCAT(f.file_path ORDER BY f.reviewfile_id) AS images
+
+        FROM TBL_REVIEW rv
+                 JOIN TBL_USER u ON u.user_no = rv.user_id
+
+                 LEFT JOIN TBL_REVIEWFILES f
+                           ON f.review_id = rv.review_id
+                               AND f.is_deleted = 0
+
+        WHERE rv.plan_id = #{planId}
+          AND rv.is_deleted = 0
+
+        GROUP BY rv.review_id
+    </select>
+
 
     <!-- =======================================================
      좋아요 관련 쿼리
