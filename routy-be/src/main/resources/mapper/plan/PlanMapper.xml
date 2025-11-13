@@ -505,7 +505,8 @@
             u.username AS userNickname,
             p.bookmark_count AS bookmarkCount,
             p.view_count AS viewCount,
-            (SELECT COUNT(*) FROM tbl_like l WHERE l.plan_id = p.plan_id) AS likeCount
+            (SELECT COUNT(*) FROM tbl_bookmark bb WHERE bb.plan_id = p.plan_id) AS bookmarkCount,
+            (SELECT COUNT(*) FROM tbl_like l WHERE l.plan_id = p.plan_id) AS likeCount,
         FROM tbl_bookmark b
                  JOIN tbl_plan p ON b.plan_id = p.plan_id
                  JOIN tbl_user u ON u.user_no = p.user_id
