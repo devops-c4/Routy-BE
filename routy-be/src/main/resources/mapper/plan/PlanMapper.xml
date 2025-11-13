@@ -24,7 +24,7 @@
     <resultMap id="PlanDayResult" type="com.c4.routy.domain.plan.dto.PlanDayDTO">
         <id property="dayId" column="duration_id"/>
         <result property="dayNo" column="day"/>
-        <result property="date" column="date"/>
+        <result property="date" column="day_date"/>
         <collection property="activities"
                     ofType="com.c4.routy.domain.plan.dto.PlanActivityDTO"
                     select="selectPlanPlaces"
@@ -99,7 +99,7 @@
             r.region_name,
             d.duration_id,
             d.day,
-            DATE_ADD(p.start_date, INTERVAL (d.day - 1) DAY) AS date,
+            DATE_ADD(p.start_date, INTERVAL (d.day - 1) DAY) AS day_date,
             t.travel_id,
             t.place_name AS place_name,
             t.address_name,
@@ -345,7 +345,7 @@
     <resultMap id="PlanEditDayResult" type="com.c4.routy.domain.plan.dto.PlanEditDayDTO">
         <id property="dayId" column="duration_id"/>
         <result property="dayNo" column="day"/>
-        <result property="date" column="date"/>
+        <result property="date" column="day_date"/>
         <collection property="activities"
                     ofType="com.c4.routy.domain.plan.dto.PlanEditActivityDTO"
                     resultMap="PlanEditActivityResult"/>
@@ -375,7 +375,7 @@
             r.region_name,
             d.duration_id,
             d.day,
-            DATE_ADD(p.start_date, INTERVAL (d.day - 1) DAY) AS date,
+            DATE_ADD(p.start_date, INTERVAL (d.day - 1) DAY) AS day_date,
             t.travel_id,
             t.place_name AS place_name,
             t.address_name AS address_name,
