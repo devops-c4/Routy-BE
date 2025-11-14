@@ -12,6 +12,7 @@ import com.c4.routy.domain.region.entity.RegionEntity;
 import com.c4.routy.domain.region.repository.RegionRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PlanServiceImpl implements PlanService {
@@ -168,10 +170,10 @@ public class PlanServiceImpl implements PlanService {
 
             // 2) 리뷰 이미지가 아예 없는 경우 → 기본 이미지 1개 삽입
             if (dto.getReviewImages().isEmpty()) {
-                dto.setReviewImages(List.of(defaultPlanImage));
+                dto.setReviewImages(List.of(dto.getDefaultPlanImage()));
             }
         }
-
+        log.info("fltmxmdhskfhdskh {}",list);
         return list;
     }
 
