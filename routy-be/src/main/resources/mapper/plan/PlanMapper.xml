@@ -198,6 +198,7 @@
         AND f.is_deleted = 0
         WHERE p.is_deleted = 0
         AND p.is_public = 0
+        AND DATE(p.end_date) &lt; CURRENT_DATE
         <!-- 필터링 조건 -->
         <if test="regionId != null">
             AND p.region_id = #{regionId}
