@@ -190,19 +190,30 @@ public class PlanServiceImpl implements PlanService {
         // 2) 리뷰 + 리뷰 이미지 조회 (별도 쿼리)
         BrowseReviewModalDTO review = planMapper.selectPlanReview(planId);
 
-        // 3) 이미지 파싱 (콤마 문자열 → 리스트)
-        if (review != null && review.getImages() != null) {
-            String[] split = review.getImages().split(",");
-            review.setImageList(Arrays.asList(split));
-        } else {
-            review.setImageList(Collections.emptyList());
-        }
+        if (review != null) {
+            // 3) 이미지 파싱 (콤마 문자열 → 리스트)
+            if (review.getImages() != null && !review.getImages().isBlank()) {
+                String[] split = review.getImages().split(",");
+                // 공백 제거 + 빈 문자열 제거까지 해주면 안전
+                List<String> imageList = Arrays.stream(split)
+                        .map(String::trim)
+                        .filter(s -> !s.isEmpty())
+                        .toList();
+                review.setImageList(imageList);
+            } else {
+                review.setImageList(Collections.emptyList());
+            }
 
-        // 4) 최종 상세 객체에 review 세팅
-        detail.setReview(review);
+            // 4) 최종 상세 객체에 review 세팅
+            detail.setReview(review);
+        } else {
+            // 리뷰가 아예 없는 경우
+            detail.setReview(null);
+        }
 
         return detail;
     }
+
 
 
     // 브라우저 모달 창 좋아요 토글
