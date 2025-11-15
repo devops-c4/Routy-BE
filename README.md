@@ -460,7 +460,12 @@ pipeline {
 ```
 </div>
 </details>
-
+<details>
+  <summary>ArgoCD</summary>
+  <div align="center">
+    <img width="1788" height="279" alt="image" src="https://github.com/user-attachments/assets/291fd878-4d67-4ef6-9f64-627517f72547" />
+  </div>
+</details>
 
 ## 팀 리뷰
 
