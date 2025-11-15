@@ -91,7 +91,7 @@
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5.7-6DB33F?logo=springboot&logoColor=white)
 ![Spring MVC](https://img.shields.io/badge/Spring_MVC-Web-6DB33F?logo=spring&logoColor=white)
 ![Spring Security](https://img.shields.io/badge/Spring_Security-Auth-6DB33F?logo=springsecurity&logoColor=white)
-![JPA](https://img.shields.io/badge/Spring_Data_JPA-Hibernate-59666C?logo=hibernate&logoColor=white)
+![JPA](https://img.shields.io/badge/Spring_Data_JPA-Hibernate-59666C?logo=hibernate&logoColor=white) <br>
 ![Gradle](https://img.shields.io/badge/Gradle-Build-02303A?logo=gradle&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-Auth-000000?logo=jsonwebtokens&logoColor=white)
 ![OAuth2](https://img.shields.io/badge/OAuth2-Social_Login-EB5424?logo=oauth&logoColor=white)
@@ -117,7 +117,7 @@
 ![VS Code](https://img.shields.io/badge/VS_Code-Editor-007ACC?logo=visualstudiocode&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-Version_Control-F05032?logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github&logoColor=white)
-![Postman](https://img.shields.io/badge/Postman-API_Testing-FF6C37?logo=postman&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-API_Testing-FF6C37?logo=postman&logoColor=white) <br>
 ![HeidiSQL](https://img.shields.io/badge/HeidiSQL-DB_Client-24292E?logo=databricks&logoColor=white)
 ![Figma](https://img.shields.io/badge/Figma-Design-F24E1E?logo=figma&logoColor=white)
 ![Notion](https://img.shields.io/badge/Notion-Docs-000000?logo=notion&logoColor=white)
