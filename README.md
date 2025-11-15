@@ -327,7 +327,7 @@
 
 ## DB 모델링
 <div align="center">
-  <img width="2540" height="1182" alt="DevOpsPjt (3)" src="https://github.com/user-attachments/assets/2baf5c92-9f39-4933-b929-0a6a7c64d708" />
+  <img width="2540" height="1182" alt="DevOpsPjt (4)" src="https://github.com/user-attachments/assets/b606e8d2-8ece-4c80-a613-b1a0f3bd1a93" />
 </div>
 
 ## Figma
