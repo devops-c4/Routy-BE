@@ -340,5 +340,121 @@
 
 ## CI/CD 파이프라인
 
+```
+pipeline {
+    agent any
+
+    tools {
+        gradle 'gradle'
+        jdk 'openJDK17'
+    }
+
+    environment {
+        SOURCE_GITHUB_URL = 'https://github.com/bynmch/Routy-BE.git'
+        MANIFESTS_GITHUB_URL = 'https://github.com/bynmch/Routy-CD.git'
+        GIT_USERNAME = 'bynmch'
+        GIT_EMAIL = 'byunmch@naver.com'
+    }
+
+    stages {
+        stage('Preparation') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh 'docker --version'
+                    } else {
+                        bat 'docker --version'
+                    }
+                }
+            }
+        }
+        stage('Source Build') {
+            steps {
+                git branch: 'main', url: "${env.SOURCE_GITHUB_URL}"
+                script {
+                    withCredentials([file(credentialsId: 'test', variable: 'secretFile')]) {
+                        if (isUnix()) {
+                            sh 'cp $secretFile ./src/main/resources/application-secret.yml'
+                            sh "chmod +x ./gradlew"
+                            sh "./gradlew clean build -x test"
+                        } else {
+                            bat "copy %secretFile% .\\src\\main\\resources\\application-secret.yml"
+                            bat "gradlew.bat clean build -x test"
+                        }
+                    } 
+                }
+            }
+        }
+        stage('Container Build and Push') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        if (isUnix()) {
+                            sh "docker build -t ${DOCKER_USER}/routy_back:${currentBuild.number} ."
+                            sh "docker build -t ${DOCKER_USER}/routy_back:latest ."
+                            sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}"
+                            sh "docker push ${DOCKER_USER}/routy_back:${currentBuild.number}"
+                            sh "docker push ${DOCKER_USER}/routy_back:latest"
+                        } else {
+                            bat "docker build -t ${DOCKER_USER}/routy_back:${currentBuild.number} ."
+                            bat "docker build -t ${DOCKER_USER}/routy_back:latest ."
+                            bat "docker login -u %DOCKER_USER% -p %DOCKER_PASS%"
+                            bat "docker push ${DOCKER_USER}/routy_back:${currentBuild.number}"
+                            bat "docker push ${DOCKER_USER}/routy_back:latest"
+                        }
+                    }
+                }
+            }
+        }
+        stage('K8S Manifest Update') {
+            steps {
+                git credentialsId: 'github',
+                    url: "${env.MANIFESTS_GITHUB_URL}",
+                    branch: 'main'
+                
+                script { 
+                    withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
+                        def githubUrl = env.MANIFESTS_GITHUB_URL.replace('https://', '')
+                        if (isUnix()) {
+                            sh "sed -i '' 's/routy_back:.*\$/routy_back:${currentBuild.number}/g' routy-deploy/backend-deploy.yml"
+                            sh "git add routy-deploy/backend-deploy.yml"
+                            sh "git config --global user.name '${env.GIT_USERNAME}'"
+                            sh "git config --global user.email '${env.GIT_EMAIL}'"
+                            sh "git commit -m '[UPDATE] ${currentBuild.number} image versioning'"
+                            sh "git push https://${GIT_USER}:${GIT_PASS}@${githubUrl} main"
+                        } else {
+                            bat "powershell -Command \"(Get-Content routy-deploy/backend-deploy.yml) -replace 'routy_back:.*', 'routy_back:${currentBuild.number}' | Set-Content routy-deploy/backend-deploy.yml\""
+                            bat "git add routy-deploy/backend-deploy.yml"
+                            bat "git config --global user.name '${env.GIT_USERNAME}'"
+                            bat "git config --global user.email '${env.GIT_EMAIL}'"
+                            bat "git commit -m \"[UPDATE] ${currentBuild.number} image versioning\""
+                            bat "git push https://%GIT_USER%:%GIT_PASS%@${githubUrl} main"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                if (isUnix()) {
+                    sh 'docker logout'
+                } else {
+                    bat 'docker logout'
+                }
+            }
+        }
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
+```
+
 ## 팀 리뷰
 
