@@ -326,6 +326,9 @@
 ## REST API 명세서
 
 ## DB 모델링
+<div align="center">
+  <img width="2540" height="1182" alt="DevOpsPjt (3)" src="https://github.com/user-attachments/assets/2baf5c92-9f39-4933-b929-0a6a7c64d708" />
+</div>
 
 ## Figma
 
