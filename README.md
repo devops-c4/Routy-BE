@@ -137,6 +137,22 @@
   <div align="center">
     <img src="" alt="일반회원가입"/>
   </div>
+  <summary>일반로그인</summary>
+  <div align="center">
+    <img src="" alt="일반로그인"/>
+  </div>
+  <summary>구글로그인</summary>
+  <div align="center">
+    <img src="" alt="구글로그인"/>
+  </div>
+  <summary>네이버로그인</summary>
+  <div align="center">
+    <img src="" alt="네이버로그인"/>
+  </div>
+  <summary>카카오로그인</summary>
+  <div align="center">
+    <img src="" alt="카카오로그인"/>
+  </div>
 </details>
 
 ### 마이페이지
