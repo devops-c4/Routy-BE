@@ -305,7 +305,7 @@
 <details>
   <summary>챗봇</summary>
   <div align="center">
-    <img src="" alt="챗봇"/>
+    <img src="https://github.com/user-attachments/assets/f1d9b2e3-7053-44d0-93e0-6038ef2a339c" alt="챗봇"/>
   </div>
 </details>
 </details>
