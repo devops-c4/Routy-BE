@@ -252,6 +252,71 @@
   </details>
 </details>
 
-### 여행일정 그리기
-### 여행일정 둘러보기
-### 일정 추천
+### 여행루트 그리기
+<details>
+  <summary>
+    <img src="" alt="지역 선택"/>
+  </summary>
+</details>
+<details>
+  <summary>
+    <img src="" alt="날짜 및 일정선택"/>
+  </summary>
+</details>
+<details>
+  <summary>
+    <img src="" alt="테마 선택"/>
+  </summary>
+</details>
+<details>
+  <summary>
+    <img src="" alt="테마 선택"/>
+  </summary>
+</details>
+<details>
+  <summary>
+    <img src="" alt="맛집/카페/관광지추가"/>
+  </summary>
+</details>
+
+### 여행루트 둘러보기
+
+<details>
+  <summary>
+    <img src="" alt="여러루트둘러보기"/>
+  </summary>
+</details>
+<details>
+  <summary>
+    <img src="" alt="좋아요및별점"/>
+  </summary>
+</details>
+<details>
+  <summary>
+    <img src="" alt="북마크"/>
+  </summary>
+</details>
+
+### Rooting(챗봇)
+<details>
+  <summary>
+    <img src="" alt="챗봇"/>
+  </summary>
+</details>
+
+
+
+## 요구사항 명세서
+
+## REST API 명세서
+
+## DB 모델링
+
+## Figma
+
+## 프로젝트 아키텍처
+
+## CI/CD 파이프라인
+
+## 팀 리뷰
+
