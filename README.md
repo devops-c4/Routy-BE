@@ -100,6 +100,77 @@
 </details>
 
 ### 마이페이지
+<details>
+  <summary>여행 루트</summary>
+<details>
+  <summary>여행 루트 추가</summary>
+  
+  ![여행 루트 추가](https://github.com/user-attachments/assets/e32c2c33-4259-4607-9873-f9e10223af99)
+</details>
+<details>
+  <summary>여행 루트 변경</summary>
+  
+  
+![여행 루트 변경](https://github.com/user-attachments/assets/40272e65-ac26-4e88-ae4c-643359e05532)
+
+</details>
+<details>
+  <summary>여행 루트 삭제</summary>
+  
+  
+![여행 루트 삭제](https://github.com/user-attachments/assets/8afadb0a-8b5c-4cf9-9d6e-92c04944a1bd)
+
+  </details>
+</details>
+
+<details>
+  <summary>여행 일차</summary>
+  
+<details>
+  <summary>여행 일차 추가</summary>
+  
+  ![여행 일차 추가](https://github.com/user-attachments/assets/cd4248a2-6bb1-42d9-b7da-466c24d7bfe5)
+
+</details>
+
+<details>
+  <summary>여행 일자 변경</summary>
+  
+  ![여행 일차 변경](https://github.com/user-attachments/assets/52ab4aa3-6610-4a84-a28c-eda9f4dc602a)
+
+</details>
+<details>
+  <summary>여행 일차 삭제</summary>
+  
+  ![여행 일차 삭제](https://github.com/user-attachments/assets/e00e8889-905f-466b-8064-8b5950776285)
+
+  </details>
+</details>
+
+<details>
+    <summary>여행 일정</summary>
+<details>
+  <summary>여행 일정 삭제</summary>
+  
+  ![여행 일정 삭제](https://github.com/user-attachments/assets/4cae3b47-f77b-44d9-9ac3-e9e6b37749e8)
+
+</details>
+
+<details>
+  <summary>여행 일정 리뷰 작성</summary>
+  
+  ![리뷰작성](https://github.com/user-attachments/assets/4d030f76-adf2-4a40-8475-fb1d195e7054)
+
+</details>
+
+<details>
+  <summary>여행 일정 공개&비공개</summary>
+  
+  ![일정 공개,비공개](https://github.com/user-attachments/assets/57c54895-c20a-415c-916b-3b3634449065)
+
+  </details>
+</details>
+
 ### 여행일정 그리기
 ### 여행일정 둘러보기
 ### 일정 추천
