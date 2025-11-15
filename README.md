@@ -339,8 +339,10 @@
 ## 프로젝트 아키텍처
 
 ## CI/CD 파이프라인
-
-```
+<details>
+<summary>젠킨스파일</summary>
+  <div align="center">
+  ```
 pipeline {
     agent any
 
@@ -455,6 +457,9 @@ pipeline {
     }
 }
 ```
+</div>
+</details>
+
 
 ## 팀 리뷰
 
