@@ -331,6 +331,10 @@
 </div>
 
 ## Figma
+<div align="center">
+  <img width="1816" height="782" alt="피그마 UI" src="https://github.com/user-attachments/assets/bb08ad4f-3e5f-4068-86ef-9e43e377b4bf" />
+</div>
+
 
 ## 프로젝트 아키텍처
 
