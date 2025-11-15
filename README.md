@@ -254,54 +254,61 @@
 
 ### 여행루트 그리기
 <details>
-  <summary>
+  <summary>지역선택</summary>
+  <div align="center">
     <img src="" alt="지역 선택"/>
-  </summary>
+    </div>
 </details>
 <details>
-  <summary>
+  <summary>일정선택</summary>
+  <div align="center">
     <img src="" alt="날짜 및 일정선택"/>
-  </summary>
+  </div>
 </details>
 <details>
-  <summary>
-    <img src="" alt="테마 선택"/>
-  </summary>
+  <summary>테마선택</summary>
+  <div align="center">
+    <img src="" alt="날짜 및 일정선택"/>
+  </div>
 </details>
 <details>
-  <summary>
-    <img src="" alt="테마 선택"/>
-  </summary>
-</details>
-<details>
-  <summary>
-    <img src="" alt="맛집/카페/관광지추가"/>
-  </summary>
+  <summary>일정추가</summary>
+  <div align="center">
+    <img src="" alt="날짜 및 일정선택"/>
+  </div>
 </details>
 
 ### 여행루트 둘러보기
 
 <details>
-  <summary>
-    <img src="" alt="여러루트둘러보기"/>
-  </summary>
+  <summary>일정선택</summary>
+  <div align="center">
+    <img src="" alt="날짜 및 일정선택"/>
+  </div>
+</details>
 </details>
 <details>
-  <summary>
-    <img src="" alt="좋아요및별점"/>
-  </summary>
+  <summary>일정선택</summary>
+  <div align="center">
+    <img src="" alt="날짜 및 일정선택"/>
+  </div>
+</details>
 </details>
 <details>
-  <summary>
-    <img src="" alt="북마크"/>
-  </summary>
+  <summary>일정선택</summary>
+  <div align="center">
+    <img src="" alt="날짜 및 일정선택"/>
+  </div>
+</details>
 </details>
 
 ### Rooting(챗봇)
 <details>
-  <summary>
-    <img src="" alt="챗봇"/>
-  </summary>
+  <summary>일정선택</summary>
+  <div align="center">
+    <img src="" alt="날짜 및 일정선택"/>
+  </div>
+</details>
 </details>
 
 
