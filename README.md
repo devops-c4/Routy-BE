@@ -73,8 +73,8 @@
 ## 💡 기술 스택
 
 <div align="center">
-### 🌿Front-End
   
+### 🌿Front-End
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black)
 ![Vue.js](https://img.shields.io/badge/Vue.js-3-4FC08D?logo=vuedotjs&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-Build-646CFF?logo=vite&logoColor=white)
@@ -85,8 +85,8 @@
 </div>
 
 <div align="center">
+  
 ### 🗃️Back-End
-
 ![Java](https://img.shields.io/badge/Java-17-007396?logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5.7-6DB33F?logo=springboot&logoColor=white)
 ![Spring MVC](https://img.shields.io/badge/Spring_MVC-Web-6DB33F?logo=spring&logoColor=white)
@@ -99,9 +99,9 @@
 ![AWS S3](https://img.shields.io/badge/AWS_S3-Storage-569A31?logo=amazonaws&logoColor=white)
 </div>
 
-<div align="center"> 
+<div align="center">
+  
 ### ☁️DevOps / Infra 
-
 ![Docker](https://img.shields.io/badge/Docker-Container-2496ED?logo=docker&logoColor=white)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-Orchestration-326CE5?logo=kubernetes&logoColor=white)
 ![Jenkins](https://img.shields.io/badge/Jenkins-CI-D24939?logo=jenkins&logoColor=white)
@@ -110,9 +110,9 @@
 ![Docker Desktop](https://img.shields.io/badge/Docker_Desktop-Local_Cluster-2496ED?logo=docker&logoColor=white)
 </div>
 
-<div>
+<div align="center">
+  
 ### 🛠️Tools
-
 ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-IDE-000000?logo=intellijidea&logoColor=white)
 ![VS Code](https://img.shields.io/badge/VS_Code-Editor-007ACC?logo=visualstudiocode&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-Version_Control-F05032?logo=git&logoColor=white)
