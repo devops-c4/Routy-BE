@@ -1,4 +1,4 @@
-![네이버 로그인](https://github.com/user-attachments/assets/0809f124-a8c1-41f7-8ce8-ca4efa3204d0)# **🧭 Routy — 국내 여행 일정 관리 플랫폼**
+# **🧭 Routy — 국내 여행 일정 관리 플랫폼**
 
 <center>
 <img width="900" height="700" alt="image" src="https://github.com/user-attachments/assets/f97687df-e0a0-4c4e-8dd5-8f989fdcb6b7" />
@@ -152,7 +152,7 @@
 <details>
   <summary>구글로그인</summary>
   <div align="center">
-    <img src="" alt="구글로그인"/>
+    <img src="https://github.com/user-attachments/assets/d7b76b02-c689-4d3a-a904-c965cfc82f68" alt="구글로그인"/>
   </div>
 </details>
 <details>
