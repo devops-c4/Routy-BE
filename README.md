@@ -312,39 +312,39 @@
 
 <br>
 
-## WBS
+## 📙 WBS
 <div align="center">
   <img width="1335" height="835" alt="image" src="https://github.com/user-attachments/assets/0e0038b1-6d07-4f29-8e6c-ddfdf0c43a55" />
 </div>
 
 <br>
 
-## 요구 사항 명세서
+## 🔡 요구 사항 명세서
 <div align="center">
   <img width="1142" height="824" alt="image" src="https://github.com/user-attachments/assets/748988fb-90f4-4613-aefe-e17116c90279" />
 </div>
 
 <br>
 
-## REST API 명세서
+## 📟 REST API 명세서
 
 <br>
 
-## DB 모델링
+## 🗃️ DB 모델링
 <div align="center">
   <img width="2540" height="1182" alt="DevOpsPjt (4)" src="https://github.com/user-attachments/assets/b606e8d2-8ece-4c80-a613-b1a0f3bd1a93" />
 </div>
 
 <br>
 
-## Figma
+## 🪄 Figma
 <div align="center">
   <img width="1816" height="782" alt="피그마 UI" src="https://github.com/user-attachments/assets/bb08ad4f-3e5f-4068-86ef-9e43e377b4bf" />
 </div>
 
 <br>
 
-## 프로젝트 아키텍처
+## 🛜 프로젝트 아키텍처
 
 <div align="center">
   
@@ -352,7 +352,7 @@
 
 <br>
 
-## CI/CD 파이프라인
+## 📱 CI/CD 파이프라인
 <details>
 <summary>젠킨스 pipeline 스크립트</summary>
 <div>
@@ -483,5 +483,5 @@ pipeline {
 
 <br>
 
-## 팀원 리뷰
+## 🍪 팀원 리뷰
 
