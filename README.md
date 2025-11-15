@@ -341,8 +341,9 @@
 ## CI/CD 파이프라인
 <details>
 <summary>젠킨스파일</summary>
-  <div align="center">
-  ```
+<div>
+
+```
 pipeline {
     agent any
 
