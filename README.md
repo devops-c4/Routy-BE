@@ -11,19 +11,19 @@
 <table>
   <tr>
     <td align="center">
-      <img width="100" height="1024" alt="동근" src="https://github.com/user-attachments/assets/8f7ce39c-afdc-477d-92b5-a80c3327ff6b" />
+      <img width="100" height="100" alt="동근" src="https://github.com/user-attachments/assets/8f7ce39c-afdc-477d-92b5-a80c3327ff6b" />
     </td>
     <td align="center">
-      <img width="100" height="1024" alt="승민" src="https://github.com/user-attachments/assets/55d9f5b1-0d88-4569-9db3-debce16bd524" />
+      <img width="100" height="100" alt="승민" src="https://github.com/user-attachments/assets/55d9f5b1-0d88-4569-9db3-debce16bd524" />
     </td>
     <td align="center">
-      <img width="100" height="1024" alt="민철" src="https://github.com/user-attachments/assets/ac93b96e-f3de-4f75-a30d-35a3b2d870ca" />
+      <img width="100" height="100" alt="민철" src="https://github.com/user-attachments/assets/ac93b96e-f3de-4f75-a30d-35a3b2d870ca" />
     </td>
     <td align="center">
-      <img width="100" height="1024" alt="승건" src="https://github.com/user-attachments/assets/491f0361-1eff-4fbf-bbf7-b31e105de293" />
+      <img width="100" height="100" alt="승건" src="https://github.com/user-attachments/assets/491f0361-1eff-4fbf-bbf7-b31e105de293" />
     </td>
     <td align="center">
-      <img width="100" height="1024" alt="지윤" src="https://github.com/user-attachments/assets/2e12ff4f-9cc8-4029-b0c1-1dc014789392" />
+      <img width="100" height="100" alt="지윤" src="https://github.com/user-attachments/assets/2e12ff4f-9cc8-4029-b0c1-1dc014789392" />
     </td>
     <td align="center">
       <img width="100" height="100" alt="혜원" src="https://github.com/user-attachments/assets/b7de8188-0686-44e3-89c0-9a120db21866" />
@@ -126,6 +126,10 @@
 <br>
 
 ## 📢 프로젝트 소개
+
+> 여행을 계획하는 사용자가 지도 기반 장소 추천과 일정 구성 기능을 통해 빠르고 쉽게 나만의 여행 일정을 완성할 수 있도록 돕는 플랫폼입니다. 
+> 사용자는 여행 지역, 기간, 테마(맛집, 카페, 관광지)를 선택하고, 추천된 맛집·카페·관광지를 조합해 나만의 일정을 구성할 수 있습니다. 
+> 복잡한 일정 짜기 과정을 단순화하고, 지도 기반 시각화로 직관적인 경험을 제공하며, 사용자가 만든 일정을 공유하고 열람할 수 있는 개방형 일정 플랫폼을 지향합니다.
 
 <br>
 
