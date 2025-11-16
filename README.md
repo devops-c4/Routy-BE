@@ -281,9 +281,8 @@
 ### 여행루트 그리기
 <details>
   <summary>지역선택</summary>
-  <div align="center">
-    <img src="" alt="지역 선택"/>
-    </div>
+    ![지역 선택](https://github.com/user-attachments/assets/076a1642-e47c-4e62-8ce3-8722af54751b)
+
 </details>
 <details>
   <summary>날짜 및 일정선택</summary>
