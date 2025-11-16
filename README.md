@@ -7,8 +7,8 @@
 <br><br>
 
 ## 👨‍💻 DEVELOPERS
-
-<table>
+<div align="center">
+  <table>
   <tr>
     <td align="center">
       <img width="100" height="100" alt="동근" src="https://github.com/user-attachments/assets/8f7ce39c-afdc-477d-92b5-a80c3327ff6b" />
@@ -50,6 +50,8 @@
     </td>
   </tr>
 </table>
+</div>
+
 
 <br>
 
