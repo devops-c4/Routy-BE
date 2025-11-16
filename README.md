@@ -298,10 +298,16 @@
 
 </details>
 <details>
+  <summary>초기</summary>
+
+  ㅇㅇㅇㅇ
+
+</details>
+
+<details>
   <summary>초기 테마 선택 기반 추천 리스트</summary>
 
   ![finaldraw_theme](./routy-gif/draw/finaldraw/1-theme_select.gif)
-
 </details>
 <details>
   <summary>맛집 선택 과정</summary>
@@ -310,10 +316,95 @@
 </details>
 
 <details>
-  <summary>☕ 카페 선택 과정</summary>
+  <summary>카페 선택 과정</summary>
 
   ![finaldraw_cafe](./routy-gif/draw/finaldraw/3-cafe_select.gif)
 </details>
+
+<details>
+  <summary>관광지 선택 과정</summary>
+
+  ![attraction_select](./routy-gif/draw/finaldraw/4-attraction_select.gif)
+</details>
+
+<details>
+  <summary>숙소 선택 과정</summary>
+
+  ![attraction_select](./routy-gif/draw/finaldraw/5-hotel_select.gif)
+</details>
+
+<details>
+  <summary>장소 검색</summary>
+  
+  ![place_search](./routy-gif/draw/finaldraw/6-place_search.gif)
+
+</details>
+
+<details>
+  <summary>장소 상세보가</summary>
+  
+  ![place_search](./routy-gif/draw/finaldraw/6-place_search2.gif)
+
+</details>
+
+<details>
+  <summary>장소 추가</summary>
+
+  ![add_place](./routy-gif/draw/finaldraw/7-add_place.gif)
+</details>
+
+<details>
+  <summary>장소 삭제</summary>
+
+  ![add_place](./routy-gif/draw/finaldraw/8-delete_place.gif)
+</details>
+
+<details>
+  <summary>루트 그리기</summary>
+
+  ![draw_path](./routy-gif/draw/finaldraw/9-draw_path.gif)
+</details>
+
+<details>
+  <summary>루트 자동 정렬</summary>
+
+  ![auto_sort](./routy-gif/draw/finaldraw/10-auto_sort.gif)
+</details>
+
+<details>
+  <summary>고정된 상태에서 루트 정렬</summary>
+
+  ![auto_sort](./routy-gif/draw/finaldraw/11-sort.gif)
+</details>
+
+<details>
+  <summary>일정 시간 입력</summary>
+
+  ![time_input](./routy-gif/draw/finaldraw/12-time_input.gif)
+</details>
+
+
+<details>
+  <summary>해당 일차 종료 과정</summary>
+
+  ![end_day](./routy-gif/draw/finaldraw/13-end_day.gif)
+</details>
+
+<details>
+  <summary>이어서 다음 일차에서 장소 추가</summary>
+
+  ![next_day_place](./routy-gif/draw/finaldraw/14-next_day_place.gif)
+</details>
+
+
+
+
+
+
+
+
+
+
 
 <details>
   <summary>경로 그리기</summary>
