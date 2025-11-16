@@ -178,6 +178,24 @@
     <img src="https://github.com/user-attachments/assets/b3929708-3024-478b-b66a-ed71ad4914cf" alt="카카오로그인"/>
   </div>
 </details>
+<details>
+  <summary>이메일 찾기</summary>
+  <div align="center">
+    <img src="https://github.com/user-attachments/assets/2fdd42fb-1d35-47a4-8cc1-0a7b060b3b0f" alt="일반회원가입"/>
+  </div>
+</details>
+<details>
+  <summary>비밀번호 찾기</summary>
+  <div align="center">
+    <img src="https://github.com/user-attachments/assets/d281b32a-8ff3-46e4-81fe-6be48dece039" alt="일반회원가입"/>
+  </div>
+</details>
+<details>
+  <summary>비밀번호 변경</summary>
+  <div align="center">
+    <img src="https://github.com/user-attachments/assets/e2f31ba5-d0d8-46ef-ac20-b5ed96023709" alt="일반회원가입"/>
+  </div>
+</details>
 
 ### 마이페이지
 <details>
