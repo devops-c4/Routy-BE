@@ -371,6 +371,23 @@
 <br>
 
 ## 📟 REST API 명세서
+<div align="center">
+  <img width="1786" height="65" alt="chatbotctrl" src="https://github.com/user-attachments/assets/8fcca479-1a4d-4915-8859-d0806fb7d6b3" /><br>
+  <img width="1787" height="141" alt="validctrl" src="https://github.com/user-attachments/assets/69711971-aa89-4c23-bc03-577623c31609" /><br>
+  <img width="1787" height="66" alt="signup" src="https://github.com/user-attachments/assets/9ddb8fe8-bacf-4988-96be-ad306508c919" /><br>
+  <img width="1787" height="140" alt="regionctrl" src="https://github.com/user-attachments/assets/bcf51786-7df7-4c22-bb42-86422fa80e34" /><br>
+  <img width="1786" height="287" alt="mypagecontroller" src="https://github.com/user-attachments/assets/e6e49254-2db9-4c15-8090-646af2e9cb3e" /><br>
+  <img width="1787" height="362" alt="kakaosearchctrl" src="https://github.com/user-attachments/assets/20a15240-a2ee-4a69-b3fd-5ec515ce663a" /><br>
+  <img width="1787" height="287" alt="kakaoplacectrl" src="https://github.com/user-attachments/assets/bb593d09-b6a2-482c-87ac-4bad5fc59d6a" /><br>
+  <img width="1787" height="215" alt="directionctrl" src="https://github.com/user-attachments/assets/93a56fef-6af2-4c56-869f-7505b7ac75e9" /><br>
+  <img width="1787" height="140" alt="placectrl" src="https://github.com/user-attachments/assets/929d8f56-471b-421e-9e31-a776008e3462" /><br>
+  <img width="1787" height="141" alt="durationctrl" src="https://github.com/user-attachments/assets/2ff5716a-e430-42bf-9b02-139ed549d5ab" /><br>
+  <img width="1787" height="288" alt="reviewctrl" src="https://github.com/user-attachments/assets/080acfa0-2106-4615-a1b2-7c2a3c29e0bf" /><br>
+  <img width="1787" height="286" alt="plandrawctrl" src="https://github.com/user-attachments/assets/0a95a796-b6a7-4c3a-b6c3-9ea1b6ab2893" /><br>
+  <img width="1787" height="432" alt="authctrl" src="https://github.com/user-attachments/assets/d8cd6bca-a045-4a3a-9c09-433fca085d7f" /><br>
+  <img width="1786" height="945" alt="planctrl" src="https://github.com/user-attachments/assets/1cf3a6c0-20bc-4bb1-a039-0fe76d64070a" />
+
+</div>
 
 <br>
 
