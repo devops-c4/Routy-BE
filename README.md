@@ -148,7 +148,57 @@
 
 <br>
 
-## 🧳 Routy-FE-결과-보고서
+## 📙 WBS
+<div align="center">
+  <img width="1335" height="835" alt="image" src="https://github.com/user-attachments/assets/0e0038b1-6d07-4f29-8e6c-ddfdf0c43a55" />
+</div>
+
+<br>
+
+## 🔡 요구 사항 명세서
+<div align="center">
+  <img width="1142" height="824" alt="image" src="https://github.com/user-attachments/assets/748988fb-90f4-4613-aefe-e17116c90279" />
+</div>
+
+<br>
+
+## 🗃️ DB 모델링
+<div align="center">
+  <img width="2540" height="1182" alt="DevOpsPjt (4)" src="https://github.com/user-attachments/assets/b606e8d2-8ece-4c80-a613-b1a0f3bd1a93" />
+</div>
+
+<br>
+
+## 🪄 와이어 프레임
+  <div align="center">
+  <img width="1816" height="782" alt="피그마 UI" src="https://github.com/user-attachments/assets/bb08ad4f-3e5f-4068-86ef-9e43e377b4bf" /> </div>
+
+
+## 📟 API 명세서
+<details>
+  <summary>REST API</summary>
+  <div align="center">
+  <img width="1786" height="65" alt="chatbotctrl" src="https://github.com/user-attachments/assets/8fcca479-1a4d-4915-8859-d0806fb7d6b3" /><br>
+  <img width="1787" height="141" alt="validctrl" src="https://github.com/user-attachments/assets/69711971-aa89-4c23-bc03-577623c31609" /><br>
+  <img width="1787" height="66" alt="signup" src="https://github.com/user-attachments/assets/9ddb8fe8-bacf-4988-96be-ad306508c919" /><br>
+  <img width="1787" height="140" alt="regionctrl" src="https://github.com/user-attachments/assets/bcf51786-7df7-4c22-bb42-86422fa80e34" /><br>
+  <img width="1786" height="287" alt="mypagecontroller" src="https://github.com/user-attachments/assets/e6e49254-2db9-4c15-8090-646af2e9cb3e" /><br>
+  <img width="1787" height="362" alt="kakaosearchctrl" src="https://github.com/user-attachments/assets/20a15240-a2ee-4a69-b3fd-5ec515ce663a" /><br>
+  <img width="1787" height="287" alt="kakaoplacectrl" src="https://github.com/user-attachments/assets/bb593d09-b6a2-482c-87ac-4bad5fc59d6a" /><br>
+  <img width="1787" height="215" alt="directionctrl" src="https://github.com/user-attachments/assets/93a56fef-6af2-4c56-869f-7505b7ac75e9" /><br>
+  <img width="1787" height="140" alt="placectrl" src="https://github.com/user-attachments/assets/929d8f56-471b-421e-9e31-a776008e3462" /><br>
+  <img width="1787" height="141" alt="durationctrl" src="https://github.com/user-attachments/assets/2ff5716a-e430-42bf-9b02-139ed549d5ab" /><br>
+  <img width="1787" height="288" alt="reviewctrl" src="https://github.com/user-attachments/assets/080acfa0-2106-4615-a1b2-7c2a3c29e0bf" /><br>
+  <img width="1787" height="286" alt="plandrawctrl" src="https://github.com/user-attachments/assets/0a95a796-b6a7-4c3a-b6c3-9ea1b6ab2893" /><br>
+  <img width="1787" height="432" alt="authctrl" src="https://github.com/user-attachments/assets/d8cd6bca-a045-4a3a-9c09-433fca085d7f" /><br>
+  <img width="1786" height="945" alt="planctrl" src="https://github.com/user-attachments/assets/1cf3a6c0-20bc-4bb1-a039-0fe76d64070a" />
+
+</div>
+</details>
+
+<br>
+
+## 🧳 API 테스트
 
 ### 회원가입 & 로그인
 <details>
@@ -396,16 +446,6 @@
   ![next_day_place](./routy-gif/draw/finaldraw/14-next_day_place.gif)
 </details>
 
-
-
-
-
-
-
-
-
-
-
 <details>
   <summary>경로 그리기</summary>
 
@@ -452,62 +492,6 @@
     <img src="https://github.com/user-attachments/assets/f1d9b2e3-7053-44d0-93e0-6038ef2a339c" alt="챗봇"/>
   </div>
 </details>
-</details>
-
-<br>
-
-## 📙 WBS
-<div align="center">
-  <img width="1335" height="835" alt="image" src="https://github.com/user-attachments/assets/0e0038b1-6d07-4f29-8e6c-ddfdf0c43a55" />
-</div>
-
-<br>
-
-## 🔡 요구 사항 명세서
-<div align="center">
-  <img width="1142" height="824" alt="image" src="https://github.com/user-attachments/assets/748988fb-90f4-4613-aefe-e17116c90279" />
-</div>
-
-<br>
-
-## 🗃️ DB 모델링
-<div align="center">
-  <img width="2540" height="1182" alt="DevOpsPjt (4)" src="https://github.com/user-attachments/assets/b606e8d2-8ece-4c80-a613-b1a0f3bd1a93" />
-</div>
-
-<br>
-
-## 📟 REST API 명세서
-<details>
-  <summary>REST API</summary>
-  <div align="center">
-  <img width="1786" height="65" alt="chatbotctrl" src="https://github.com/user-attachments/assets/8fcca479-1a4d-4915-8859-d0806fb7d6b3" /><br>
-  <img width="1787" height="141" alt="validctrl" src="https://github.com/user-attachments/assets/69711971-aa89-4c23-bc03-577623c31609" /><br>
-  <img width="1787" height="66" alt="signup" src="https://github.com/user-attachments/assets/9ddb8fe8-bacf-4988-96be-ad306508c919" /><br>
-  <img width="1787" height="140" alt="regionctrl" src="https://github.com/user-attachments/assets/bcf51786-7df7-4c22-bb42-86422fa80e34" /><br>
-  <img width="1786" height="287" alt="mypagecontroller" src="https://github.com/user-attachments/assets/e6e49254-2db9-4c15-8090-646af2e9cb3e" /><br>
-  <img width="1787" height="362" alt="kakaosearchctrl" src="https://github.com/user-attachments/assets/20a15240-a2ee-4a69-b3fd-5ec515ce663a" /><br>
-  <img width="1787" height="287" alt="kakaoplacectrl" src="https://github.com/user-attachments/assets/bb593d09-b6a2-482c-87ac-4bad5fc59d6a" /><br>
-  <img width="1787" height="215" alt="directionctrl" src="https://github.com/user-attachments/assets/93a56fef-6af2-4c56-869f-7505b7ac75e9" /><br>
-  <img width="1787" height="140" alt="placectrl" src="https://github.com/user-attachments/assets/929d8f56-471b-421e-9e31-a776008e3462" /><br>
-  <img width="1787" height="141" alt="durationctrl" src="https://github.com/user-attachments/assets/2ff5716a-e430-42bf-9b02-139ed549d5ab" /><br>
-  <img width="1787" height="288" alt="reviewctrl" src="https://github.com/user-attachments/assets/080acfa0-2106-4615-a1b2-7c2a3c29e0bf" /><br>
-  <img width="1787" height="286" alt="plandrawctrl" src="https://github.com/user-attachments/assets/0a95a796-b6a7-4c3a-b6c3-9ea1b6ab2893" /><br>
-  <img width="1787" height="432" alt="authctrl" src="https://github.com/user-attachments/assets/d8cd6bca-a045-4a3a-9c09-433fca085d7f" /><br>
-  <img width="1786" height="945" alt="planctrl" src="https://github.com/user-attachments/assets/1cf3a6c0-20bc-4bb1-a039-0fe76d64070a" />
-
-</div>
-</details>
-
-<br>
-
-## 🪄 Figma
-<details>
-  <summary>Figma UI</summary>
-  <div align="center">
-  <img width="1816" height="782" alt="피그마 UI" src="https://github.com/user-attachments/assets/bb08ad4f-3e5f-4068-86ef-9e43e377b4bf" />
-</div>
-
 </details>
 
 <br>
