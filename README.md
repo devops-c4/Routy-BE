@@ -390,7 +390,7 @@
 </details>
 
 <details>
-  <summary>장소 상세보가</summary>
+  <summary>장소 상세보기</summary>
   
   ![place_search](./routy-gif/draw/finaldraw/6-place_search2.gif)
 
@@ -415,7 +415,7 @@
 </details>
 
 <details>
-  <summary>루트 자동 정렬</summary>
+  <summary>루트 정렬</summary>
 
   ![auto_sort](./routy-gif/draw/finaldraw/10-auto_sort.gif)
 </details>
@@ -443,21 +443,6 @@
   <summary>이어서 다음 일차에서 장소 추가</summary>
 
   ![next_day_place](./routy-gif/draw/finaldraw/14-next_day_place.gif)
-</details>
-
-<details>
-  <summary>경로 그리기</summary>
-
-  ![Image](https://github.com/user-attachments/assets/79ff9eda-db9c-48f9-bb26-0eb4305cd05a)
-
-</details>
-<details>
-  <summary>일정 정렬</summary>
-
-
-  ![Image](https://github.com/user-attachments/assets/c3e5bb7a-1310-4d79-987f-638e7a3782a3)        
-  ![Image](https://github.com/user-attachments/assets/8bb1bb2b-d10c-42b6-a2c3-08b1c6256ac6)
-
 </details>
 
 ### 여행루트 둘러보기
