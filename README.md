@@ -348,10 +348,9 @@
 
 </details>
 <details>
-  <summary>초기</summary>
+  <summary>지도 중심 좌표 기반 장소 검색</summary>
 
-  ㅇㅇㅇㅇ
-
+![theme_select](./routy-gif/finaldraw/0-select.gif)
 </details>
 
 <details>
