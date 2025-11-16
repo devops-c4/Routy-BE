@@ -61,15 +61,17 @@ C4 - creating cool
 
 #### [💡 기술 스택](#-기술-스택)  <br>
 #### [📢 프로젝트 소개](#-프로젝트-소개)  <br>
-#### [🧳 Routy FE 결과 보고서](#-Routy-FE-결과-보고서)  <br>
-#### [📙 WBS](#-wbs-1)<br> 
-#### [🔡 요구사항 명세서](#-요구-사항-명세서)  <br>
-#### [🗃️ DB 모델링](#%EF%B8%8F-db-모델링)  <br>
-#### [📟 REST API 명세서](#-rest-api-명세서)  <br>
-#### [🪄 Figma](#-figma)  <br>
+#### [📙 WBS](#-wbs)  <br>
+#### [🔡 요구 사항 명세서](#-요구-사항-명세서)  <br>
+#### [🏛️ DDD](#ddd)  <br>
+#### [🗃️ 논리 모델링](#-논리-모델링)  <br>
+#### [🗃️ 물리 모델링](#-물리-모델링)  <br>
+#### [🪄 와이어 프레임](#-와이어-프레임)  <br>
+#### [📟 API 명세서](#-api-명세서)  <br>
+#### [🧪 API 테스트](#-api-테스트)  <br>
 #### [🛜 프로젝트 아키텍처](#-프로젝트-아키텍처)  <br>
 #### [📱 CI/CD 파이프라인](#-cicd-파이프라인)  <br>
-#### [🍪 프로젝트 회고](#-프로젝트-회고)  <br>
+#### [🍪 프로젝트 회고](#-프로젝트-회고)    <br>
 
 <br>
 
@@ -163,6 +165,13 @@ C4 - creating cool
 
 <br>
 
+## 🏛️ DDD
+<div align="center">
+  <img width="657" height="611" alt="스크린샷 2025-11-17 오전 3 16 55" src="https://github.com/user-attachments/assets/7a3603af-a27d-45c4-8f09-7e936166ceaf" />
+</div>
+
+<br>
+
 ## 🗃️ 논리 모델링
 <div align="center">
   <img width="674" height="693" alt="image" src="https://github.com/user-attachments/assets/6044bca4-620c-4869-98cc-9f22fd0c32a1" />
@@ -180,6 +189,7 @@ C4 - creating cool
   <div align="center">
   <img width="1816" height="782" alt="피그마 UI" src="https://github.com/user-attachments/assets/bb08ad4f-3e5f-4068-86ef-9e43e377b4bf" /> </div>
 
+<br>
 
 ## 📟 API 명세서
 <details>
@@ -441,7 +451,7 @@ C4 - creating cool
 
 
 <details>
-  <summary>해당 일차 종료 과정</summary>
+  <summary>해당 일차 종료</summary>
 
   ![end_day](./routy-gif/draw/finaldraw/13-end_day.gif)
 </details>
@@ -452,24 +462,30 @@ C4 - creating cool
   ![next_day_place](./routy-gif/draw/finaldraw/14-next_day_place.gif)
 </details>
 
+<details>
+  <summary>일정 저장</summary>
+
+  ![next_day_place](./routy-gif/draw/finaldraw/15-save_day_place.gif)
+</details>
+
 ### 여행루트 둘러보기
 
 <details>
-  <summary>루트둘러보기</summary>
+  <summary>루트 둘러보기</summary>
   <div align="center">
     <img src="https://github.com/user-attachments/assets/919007d8-beca-42ab-8ee1-990289bc4183" alt="루트둘러보기"/>
   </div>
 </details>
 </details>
 <details>
-  <summary>좋아요/별점 및 북마크</summary>
+  <summary>좋아요 및 북마크</summary>
   <div align="center">
     <img src="https://github.com/user-attachments/assets/3951f280-e377-4e7a-87bc-08b8e8139455" alt="좋아요/별점 및 북마크"/>
   </div>
 </details>
 </details>
 <details>
-  <summary>나의일정으로 불러오기</summary>
+  <summary>나의 일정으로 불러오기</summary>
   <div align="center">
     <img src="https://github.com/user-attachments/assets/17edf420-8ebf-417c-91e1-b3dd98d4f890" alt="나의일정으로 불러오기"/>
   </div>
@@ -479,9 +495,8 @@ C4 - creating cool
 ### Rooting(챗봇)
 <details>
   <summary>챗봇</summary>
-  <div align="center">
-    <img src="https://github.com/user-attachments/assets/f1d9b2e3-7053-44d0-93e0-6038ef2a339c" alt="챗봇"/>
-  </div>
+  
+  ![챗봇](https://github.com/user-attachments/assets/8913c132-0a23-496d-b4b8-d23326749f48)
 </details>
 </details>
 
