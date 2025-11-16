@@ -300,7 +300,26 @@
     <img src="" alt="일정추가"/>
   </div>
 </details>
+<details>
+  <summary>마커 애니메이션</summary>
 
+![Image](https://github.com/user-attachments/assets/02d389a9-8a04-4b01-9714-3e7e915fa69d)
+
+</details>
+<details>
+  <summary>경로 그리기</summary>
+
+  ![Image](https://github.com/user-attachments/assets/79ff9eda-db9c-48f9-bb26-0eb4305cd05a)
+
+</details>
+<details>
+  <summary>일정 정렬</summary>
+
+
+  ![Image](https://github.com/user-attachments/assets/c3e5bb7a-1310-4d79-987f-638e7a3782a3)        
+  ![Image](https://github.com/user-attachments/assets/8bb1bb2b-d10c-42b6-a2c3-08b1c6256ac6)
+
+</details>
 ### 여행루트 둘러보기
 
 <details>
