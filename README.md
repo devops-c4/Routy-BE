@@ -1,7 +1,7 @@
 # **🧭 Routy — 국내 여행 일정 관리 플랫폼**
 
 <div align="center">
-<img width="1510" height="782" alt="스크린샷 2025-11-17 오전 12 10 46" src="https://github.com/user-attachments/assets/af43439d-d5b2-4b22-87ae-012eb7a06539" />
+<img width="1510" height="778" alt="스크린샷 2025-11-17 오전 12 13 06" src="https://github.com/user-attachments/assets/26ba354a-e526-4c5e-b477-9597603eb087" />
 
 </div>
 
