@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.c4.routy.domain.mypage.mapper.MypageQueryMapper">
+
+    <!-- =========================================================
+         1) 상단 프로필
+         ========================================================= -->
+    <select id="selectProfile"
+            parameterType="int"
+            resultType="com.c4.routy.domain.mypage.dto.ProfileDTO">
+        SELECT
+            u.user_no   AS userNo,
+            u.username  AS username,
+            u.image_url AS profileImage,
+
+            /* 내가 만든 일정 수 */
+            (
+                SELECT COUNT(*)
+                FROM tbl_plan p
+                WHERE p.user_id = u.user_no
+                  AND (p.is_deleted IS NULL OR p.is_deleted = 0)
+            ) AS totalPlanCount,
+
+            /* 내가 만든 일정에 달린 리뷰 수 */
+            (
+                SELECT COUNT(*)
+                FROM tbl_review r
+                         JOIN tbl_plan p2 ON r.plan_id = p2.plan_id
+                WHERE p2.user_id = u.user_no
+                  AND (r.is_deleted IS NULL OR r.is_deleted = 0)
+            ) AS totalReviewCount,
+
+            /* 내 플랜이 받은 좋아요 수 */
+            (
+                SELECT COUNT(*)
+                FROM tbl_like l
+                         JOIN tbl_plan p3 ON l.plan_id = p3.plan_id
+                WHERE p3.user_id = u.user_no
+            ) AS totalLikeReceived,
+
+            /* 내가 북마크한 일정 수 */
+            (
+                SELECT COUNT(*)
+                FROM tbl_bookmark b
+                WHERE b.user_id = u.user_no
+            ) AS totalBookmarkCount
+
+        FROM tbl_user u
+        WHERE u.user_no = #{userNo}
+    </select>
+
+
+    <!-- =========================================================
+         2) 달력에 뿌릴 일정들
+         ========================================================= -->
+    <resultMap id="CalendarPlanMap" type="com.c4.routy.domain.mypage.dto.CalendarPlanDTO">
+        <result property="id"        column="plan_id"/>
+        <result property="title"     column="plan_title"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate"   column="end_date"/>
+    </resultMap>
+
+    <select id="selectCalendarPlans" resultMap="CalendarPlanMap">
+        SELECT
+            p.plan_id,
+            p.plan_title,
+            p.start_date,
+            p.end_date
+        FROM tbl_plan p
+        WHERE p.user_id = #{userNo}
+          AND (p.is_deleted IS NULL OR p.is_deleted = 0)
+            /* 해당 월과 겹치는 일정만 */
+          AND (
+            (p.start_date <![CDATA[>=]]> #{startDate} AND p.start_date <![CDATA[<=]]> #{endDate})
+                OR (p.end_date   <![CDATA[>=]]> #{startDate} AND p.end_date   <![CDATA[<=]]> #{endDate})
+                OR (p.start_date <![CDATA[<=]]> #{startDate} AND p.end_date   <![CDATA[>=]]> #{endDate})
+            )
+        ORDER BY p.start_date ASC
+    </select>
+
+
+    <!-- =========================================================
+         3) 오른쪽 "내 일정" (다가오는 일정)
+         ========================================================= -->
+    <resultMap id="MyPlanMap" type="com.c4.routy.domain.mypage.dto.MyPlanDTO">
+        <result property="planId"    column="plan_id"/>
+        <result property="title"     column="plan_title"/>
+        <result property="regionName" column="region_name"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate"   column="end_date"/>
+    </resultMap>
+
+    <select id="selectUpcomingPlans" resultMap="MyPlanMap">
+        SELECT
+        p.plan_id,
+        p.plan_title,
+        r.region_name,
+        p.start_date,
+        p.end_date
+        FROM tbl_plan p
+        LEFT JOIN tbl_region r ON p.region_id = r.region_id
+        WHERE p.user_id = #{userNo}
+        AND (p.is_deleted IS NULL OR p.is_deleted = 0)
+        <!-- 오늘 이후(=앞으로 다가올) 일정만 -->
+        AND STR_TO_DATE(p.start_date, '%Y-%m-%d') <![CDATA[>=]]> CURRENT_DATE()
+        ORDER BY p.start_date ASC
+        LIMIT 10
+    </select>
+
+
+    <!-- =========================================================
+         4) 여행 기록 (지난 일정)
+         ========================================================= -->
+    <select id="selectTravelHistory"
+            parameterType="int"
+            resultType="com.c4.routy.domain.mypage.dto.TravelRecordDTO">
+        SELECT
+            p.plan_id   AS planId,
+            (
+                SELECT t.image_path
+                FROM tbl_travel t
+                         JOIN tbl_duration d ON t.duration_id = d.duration_id
+                WHERE d.plan_id = p.plan_id
+                  AND t.image_path IS NOT NULL
+                ORDER BY t.travel_order ASC, t.travel_id ASC
+                           LIMIT 1
+            )             AS thumbnailUrl,
+            p.plan_title AS title,
+            p.start_date AS startDate,
+            p.end_date   AS endDate
+        FROM tbl_plan p
+        WHERE p.user_id = #{userNo}
+          AND (p.is_deleted IS NULL OR p.is_deleted = 0)
+          AND STR_TO_DATE(p.end_date, '%Y-%m-%d') <![CDATA[<]]> CURRENT_DATE()
+        ORDER BY p.end_date DESC
+            LIMIT 3
+    </select>
+
+
+    <!-- =========================================================
+         5) 북마크 목록
+         ========================================================= -->
+    <select id="selectBookmarks"
+            parameterType="int"
+            resultType="com.c4.routy.domain.mypage.dto.BookmarkDTO">
+        SELECT
+            b.bookmark_id     AS bookmarkId,
+            b.created_at      AS createdAt,
+            p.plan_id         AS planId,
+            p.plan_title      AS planTitle,
+            p.bookmark_count  AS bookmarkCount
+        FROM tbl_bookmark b
+                 JOIN tbl_plan p ON b.plan_id = p.plan_id
+        WHERE b.user_id = #{userNo}
+        ORDER BY b.created_at DESC
+            LIMIT 8
+    </select>
+
+
+
+    <!-- 전체 여행 기록 -->
+    <!-- 완료된 여행만 -->
+    <select id="selectAllTravelRecords"
+            parameterType="int"
+            resultType="com.c4.routy.domain.mypage.dto.TravelRecordDTO">
+        SELECT
+            p.plan_id        AS planId,
+            p.plan_title     AS title,
+            p.start_date     AS startDate,
+            p.end_date       AS endDate,
+            COALESCE(
+                    (
+                        SELECT t.image_path
+                        FROM tbl_travel t
+                        WHERE t.duration_id IN (
+                            SELECT d.duration_id
+                            FROM tbl_duration d
+                            WHERE d.plan_id = p.plan_id
+                        )
+                          AND t.image_path IS NOT NULL
+                        ORDER BY t.travel_id ASC
+                    LIMIT 1
+                ),
+        '/images/default-thumb.jpg'
+        ) AS thumbnailUrl
+        FROM tbl_plan p
+        WHERE p.user_id = #{userNo}
+          AND (p.is_deleted IS NULL OR p.is_deleted = 0)
+          AND DATE(p.end_date) &lt; CURRENT_DATE
+        ORDER BY p.end_date DESC
+    </select>
+
+
+    <!-- 전체 북마크 -->
+    <select id="selectAllBookmarks"
+            parameterType="int"
+            resultType="com.c4.routy.domain.mypage.dto.BookmarkDTO">
+        SELECT
+            b.bookmark_id   AS bookmarkId,
+            b.created_at    AS createdAt,
+            p.plan_id       AS planId,
+            p.plan_title    AS planTitle,
+            (
+                SELECT COUNT(*)
+                FROM tbl_bookmark bb
+                WHERE bb.plan_id = p.plan_id
+            ) AS bookmarkCount
+        FROM tbl_bookmark b
+                 JOIN tbl_plan p ON b.plan_id = p.plan_id
+        WHERE b.user_id = #{userNo}
+          AND (p.is_deleted IS NULL OR p.is_deleted = 0)
+        ORDER BY b.created_at DESC
+    </select>
+</mapper>
