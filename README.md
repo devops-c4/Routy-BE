@@ -283,7 +283,8 @@
 <details>
   <summary>여행 루트 추가</summary>
   
-  ![여행 루트 추가]![Image](https://github.com/user-attachments/assets/919007d8-beca-42ab-8ee1-990289bc4183)
+  ![여행 루트 추가](https://github.com/user-attachments/assets/ba81eb3d-f77c-4dd0-baea-eeb8886a4fe5)
+
 </details>
 <details>
   <summary>여행 루트 변경</summary>
